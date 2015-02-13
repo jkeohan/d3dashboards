@@ -1,0 +1,43 @@
+{
+  "examples": [{
+    "title" : "worldmap",
+    "friendlyname" : "World Map",
+    "js": "worldmap.js"
+  },{
+    "title" : "stackedbarchart",
+    "friendlyname" : "Stacked Bar Chart",
+    "js": "stackedbarchart.js"
+  },{
+    "title" : "bubble",
+    "friendlyname" : "Bubble Chart",
+    "js": "bubblechart.js"
+  },{
+    "title" : "horizontalbarchart",
+    "friendlyname" : "Horizonal Bar Chart",
+    "js": "horizontalbarchart.js"
+  },{
+    "title" : "programoverview",
+    "friendlyname" : "Program Overview",
+    "js"  : "programoverview.js"
+  }],
+
+  "social" : [{
+    "shortname" : "facebook",
+    "img" : "/images/socialmedia/facebook.png",
+    "url" : "http://www.facebook.com/rouxmeet"
+  },{
+    "shortname" : "LinkdIN",
+    "img" : "/images/socialmedia/meetup.png",
+    "url" : "http://www.meetup.com/rouxmeet/"
+  }],
+
+  "meeting" : {
+    "date": "Thursday, March 27th",
+    "time": "6-9pm",
+    "where": {
+      "name": "Hotel Gwendoline",
+      "img": "/images/misc/hotel_gwendoline.jpg",
+      "address": "123 Elm Street"
+    }
+  }
+}

@@ -1,0 +1,85 @@
+.path {
+stroke: white; stroke-width: 0.75px; fill: lightgrey;
+}
+
+.leftCol {
+
+}
+
+.filters{
+	margin: 0 auto;
+	width: 100%;
+}
+
+.worldMap {
+	width: auto;
+	height: 300px;
+	overflow: hidden;
+	/*background-color: blue;
+	background-image: url("http://geology.com/world/world-map.gif")	;*/
+
+}
+
+ .clearfix {
+          clear: both;
+     }
+
+.charts {
+	float: left ;
+	width: 250px;
+	height: 200px;
+	margin-right: 30px;
+}
+
+.allsites{
+	overflow: hidden;
+	height: 900px;
+	width: auto;
+	border-color: black;
+}
+
+.icon-home:before {
+	color:white;
+}
+
+.icon-picture:before {
+	color:white;
+}
+
+.navigation .nav{
+	font-size: 15px;
+}
+
+.nav-tabs {
+	padding-left: 30px;
+	border-bottom: white;
+}
+
+
+.nav-tabs a{
+	text-decoration: none;
+}
+
+.nav-tabs .header{
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.nav-tabs .header li {
+
+	font-size: 12px;
+	text-align: left;
+}
+
+.stackedbarchart {
+	font-size: 10px;
+}
+
+.overlay { 
+	fill: none;
+	pointer-events: all;
+}
+
+
+
+
