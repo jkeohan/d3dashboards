@@ -1,3 +1,43 @@
+footer {
+	height: 30px;
+	width: 100%;
+	position: absolute; 
+
+	/*adding position without width @ 100% will decrease the 
+	width of footer to it's content. 
+	http://www.cssreset.com/how-to-keep-footer-at-bottom-of-page-with-css/
+	*/
+
+}
+
+hr {
+	padding: 0px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.layout.footer {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.container {
+	padding-bottom: 100px;
+	padding; 10px;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.wrapper {
+	min-height: 100%;
+	position: relative;
+}
+
+.navigation .layout {
+		margin-left: 50px;
+	margin-right: 50px;
+}
+
 .path {
 stroke: white; stroke-width: 0.75px; fill: lightgrey;
 }
@@ -81,5 +121,59 @@ stroke: white; stroke-width: 0.75px; fill: lightgrey;
 }
 
 
+
+.selected{
+	opacity: 0;
+}
+
+.full {
+	fill: green;
+}
+
+.partialcmt1 {
+	fill: blue;
+}
+
+.partialcmt2 {
+	fill: lightblue;
+}
+
+.partialt1 {
+	fill: orange;
+}
+
+.partialt2 {
+	fill: yellow;
+}
+
+.zero {
+	fill: red;
+}
+
+.tooltiptext {
+	border-color: solid 1px black;
+}
+
+.stackedbarchart {
+	width: 500px;
+}
+
+.xaxis {
+	font-size: 8px;
+}
+
+.legend {
+	cursor: pointer
+}
+
+.rectangleselected { 
+
+}
+
+.legendselected{
+		font-weight: bold;
+		font-size: 10px;
+
+}
 
 
