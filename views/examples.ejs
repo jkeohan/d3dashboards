@@ -2,55 +2,28 @@
 <html>
   <head><% include partials/template/head.ejs %></head>
 <style>
-
 path {
     stroke: white; 
     stroke-width: 0.75px; 
     fill: lightgrey;
     opacity: .5;
 }
-
 </style>
   <body>
-    <header><% include partials/template/header.ejs %></header>
-  	<div class="container">
-  		<div class="row">
-  			<div class="col-md-3">
-  				<ul class="nav nav-tabs">
-  					<li class="active header"><a href="#">Examples</a>
-            <!-- Li's should be dynamically created and pulled from scd.json file -->
-  						<ul> 
-                <li><a href="/examples/bubble">Bubble</a></li>
-                <li><a href="/examples/horizontalbarchart">Horizonal Bar Chart</a></li>
-		  					<li><a href="/examples/stackedbarchart">Stacked Bar Chart</a></li>
-		  					<li><a href="/examples/worldmap">World Map</a></li>
-		  				</ul>
-		  			</li>
-		  			<li class="header"><a href="#">Dashboards</a>
-		  				<ul>
-		  					<li><a href="/examples/programoverview">Program Overview</a></li>
-		  					<li>Random Thoughts</li>
-		  				</ul>
-		  			</li>
-		  		</ul>
-  			</div><!--md3-->
-  			<div class="col-md-9">
-  				<!-- Default page should show all example images as h x w  
-							
-  				-->
-  		    <% include partials/content/demoarea.ejs %>
-
-
-  			</div><!--md9-->
-
-  		</div><!--row-->
-
-  	</div><!--container-->
-
-      <% include partials/template/footer.ejs %>
-
-
-      
+    <div class="wrapper">
+      <header><% include partials/template/header.ejs %></header>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+          <% include partials/content/leftNav.ejs %>
+          </div><!--md3-->
+          <div class="col-md-9">
+            <% include partials/content/demoarea.ejs %>
+          </div><!--md9-->
+        </div><!--row-->
+      </div><!--container-->
+        <% include partials/template/footer.ejs %>    
+      </div><!--wrapper-->  
   </body>
 </html>
 
