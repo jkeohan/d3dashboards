@@ -21,14 +21,22 @@
     "js"  : "programoverview.js"
   }],
 
+  "dashboards": [{
+    "title" : "programoverview",
+    "friendlyname" : "Program Overview",
+    "worldmap"  : "programoverview.js",
+    "piechart"  : "piechart.js",
+    "stackedbar": "po-stackedbarchart.js"
+    }],
+
   "social" : [{
-    "shortname" : "facebook",
-    "img" : "/images/socialmedia/facebook.png",
+    "shortname" : "gitbub",
+    "img" : "/images/socialmedia/github.png",
     "url" : "http://www.facebook.com/rouxmeet"
   },{
     "shortname" : "LinkdIN",
-    "img" : "/images/socialmedia/meetup.png",
-    "url" : "http://www.meetup.com/rouxmeet/"
+    "img" : "/images/socialmedia/linkedin.png",
+    "url" : "http://www.LinkdIN.com/in/jkeohan/"
   }],
 
   "meeting" : {
