@@ -2,23 +2,23 @@
   "examples": [{
     "title" : "worldmap",
     "friendlyname" : "World Map",
-    "js": "worldmap.js"
-  },{
-    "title" : "stackedbarchart",
-    "friendlyname" : "Stacked Bar Chart",
-    "js": "stackedbarchart.js"
+    "js": "worldmap.js",
+    "pic": "/images/examples/worldmap.png"
   },{
     "title" : "bubble",
     "friendlyname" : "Bubble Chart",
-    "js": "bubblechart.js"
+    "js": "bubblechart.js",
+    "pic": "/images/examples/bubble.png"
+  },{
+    "title" : "stackedbarchart",
+    "friendlyname" : "Stacked Bar Chart",
+    "js": "stackedbarchart.js",
+    "pic": "/images/examples/stackedbar.png"
   },{
     "title" : "horizontalbarchart",
     "friendlyname" : "Horizonal Bar Chart",
-    "js": "horizontalbarchart.js"
-  },{
-    "title" : "programoverview",
-    "friendlyname" : "Program Overview",
-    "js"  : "programoverview.js"
+    "js": "horizontalbarchart.js",
+    "pic": "/images/examples/horizonalbar.png"
   }],
 
   "dashboards": [{
