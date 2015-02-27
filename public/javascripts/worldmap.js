@@ -119,8 +119,11 @@ d3.json("/data/world.json", function(error, world) {
             //adding the below code removes all circles
             // .style("opacity",0)
               // .transition.duration(2000).style("opacity",.7)
-
+        //ENTER
         circle.enter().append("circle")
+
+        //UPDATE
+        circle
          .attr("class", function (d) { return circleEngagement(d) })
          .on("mouseover", mouseover)
          .on("mouseout", mouseout)
@@ -130,7 +133,6 @@ d3.json("/data/world.json", function(error, world) {
            //Longitude must be first in the sequence
            // .attr("cx", function(d) { return projection([d.Longitude, d.Latitude])[0];})
            // .attr("cy", function(d) { return projection([d.Longitude, d.Latitude])[1]; })
-         
            // .attr("cx", function(d) { return projection([d.Longitude])[0];})
            // .attr("cy", function(d) { return projection([d.Latitude])[0];})
          .attr("r", 5)
