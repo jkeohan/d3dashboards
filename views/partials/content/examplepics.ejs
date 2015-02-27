@@ -1,0 +1,18 @@
+<h1> <%= title %> </h1>
+
+<article class="exampleslist">
+	<section class="layout">
+		<div class="examples">
+		<% examples.forEach(function(item) { %>
+			<article class="example group"> 
+				<div id="<%= item.title %>">
+				  <h3> <%= item.friendlyname %> </h3>
+				  <a href="/examples/<%= item.title %>">
+						<img src="<%= item.pic %>">
+					</a>
+				</div>
+			</article>
+			<% }) %> 
+	</div>
+	</section>
+</article>
