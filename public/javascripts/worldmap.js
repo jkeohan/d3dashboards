@@ -33,7 +33,7 @@ d3.json("/data/world.json", function(error, world) {
           fill: "lightgrey"
           })
 
-    d3.csv("/data/cm.csv", function(data) {
+    d3.csv("/data/cm_sampledata.csv", function(data) {
 
       //currentData will be used for filtering based on legend options. 
       //var currentData = data//.map(function(d) { return d.Engagement == "*"})
@@ -201,10 +201,6 @@ d3.json("/data/world.json", function(error, world) {
 
       function mouseover(d) {
          var string = "";
-                  string = string + "<strong>";
-                  string = string + "Site: " + "</strong>";
-                  string = string + d["Site Code"];
-                  string = string + "<br>";
                   string = string + "City: "
                   string = string + d["City"]
                   string = string + "<br>"

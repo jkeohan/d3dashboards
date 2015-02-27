@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head><script src="http://d3js.org/d3.v3.min.js"></script></head>
+<style>
+
+path {
+    stroke: white; 
+    stroke-width: 0.75px; 
+    fill: lightgrey;
+    opacity: .5;
+}
+
+</style>
+  <body>
+  
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-md-3">
+  		  <script>
+
+        //var data = [{"cx":10, "cy":10, "r": 10}]
+        var data = [10,20,30,40]
+        var svg = d3.select(".col-md-3").append('svg')
+          .attr("height", 400)
+          .attr("width", 400)
+
+
+     
+            // .transition()
+            // .attr("cx", return 100)
+            // .attr('cy', function(d) { return d.cy + 10})
+            // .attr('cx', function(d) { return d.cx + 10})
+            // .attr('r', function(d) { return d.r + 10 )
+
+        
+
+        setInterval(function() {
+         var arr =  [
+        Math.floor(Math.random()*10),
+        Math.floor(Math.random()*10),
+        Math.floor(Math.random()*10),
+       ]
+          projectData(arr),1000
+        })
+        
+        function projectData(arr) { 
+          var circles = svg.selectAll("circle").data(arr)
+
+          var circleEnter = circles.enter().append("circle")
+          .attr('cy', function(d,i) { return i*d+10 })
+          .attr('cx', function(d) { return 40})
+          .attr('r', function(d) { return 5})
+            // .transition()
+            // .attr("cx", return 100)
+
+          .style("fill", "blue")
+          circleEnter.transition().duration(2000)
+          .attr("cx", function(d,i) { return i})
+          .attr("r", function(d,i){return i})          //Setting     //cx = cen)  
+          .attr("cy", function(d,i){return i})
+
+        circles.exit().remove()
+        }
+
+        </script>
+  			<div class="col-md-9">
+ 
+
+
+      
+  </body>
+</html>
