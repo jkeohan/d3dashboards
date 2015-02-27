@@ -1,23 +1,23 @@
-var width = 875;
+var width = 800;
 var height = 375;
 var map = void 0; // Update global
 
 //var color = d3.scale.category20c()
 var color = d3.scale.ordinal()
   .domain(["Full","Partial: CMT 1","Partial: CMT 2","Partial: Training 1", "Partial: Training 2", "Zero"])
-  .range(["green","blue","steelblue","orange","yellow","red"])
+  .range(["green","blue","lightblue","orange","yellow","red"])
 
 var projection = d3.geo.mercator()
     .center([20, 5])
     .rotate([4.4, 0])
     //.parallels([50, 60])
-    .scale(125)
+    .scale(150)
     .translate([width / 2, height / 2]);
 
 var path = d3.geo.path()
     .projection(projection);
 
-var svg = d3.select(".worldmap").append("svg")
+var svg = d3.select(".po-worldmap").append("svg")
     .attr("width", width)
     .attr("height", height)
 
@@ -65,7 +65,7 @@ d3.json("/data/world.json", function(error, world) {
           // d3.select('.legendselected').select("text").classed("texteselected",true)
   
       legend.append('rect')
-        .attr("x", 120)
+        .attr("x", 110)
         .attr("y", height - 150)
         .attr("width", 10)
         .attr("height", 10)
@@ -73,7 +73,7 @@ d3.json("/data/world.json", function(error, world) {
         .style("fill", color )
 
       legend.append('text')
-        .attr("x", 110)
+        .attr("x", 100)
         .attr("y", height - 145)
         .attr("dy", ".35em")
         .text(function(d,i) { return d})
@@ -94,52 +94,71 @@ d3.json("/data/world.json", function(error, world) {
             // d3.selectAll(".rectangleselected").classed("rectangleselected", false)
             //   .transition().duration(2000).style("opacity",0.2)
 
+
             d3.select(this).classed("legendselected",true)
                .transition().duration(2000)
                 .style("font-size",12)
          
+
+          
             var newData = (currentData.filter(function(d) { return d.Engagement === legendChoice } ))
             populateMap(newData)
            })
         
 
+
+       
       populateMap(currentData)
 
       function populateMap(circledata) {
         //console.log(circledata)
-        //DATA JOIN...Join new data with old elements if any
          var circle = svg.selectAll("circle")
-           .data(circledata).attr("opacity",0)
+           .data(circledata)
 
-         circle.attr("class", function (d) { return circleEngagement(d) })
-          .on("mouseover", mouseover)
-          .on("mouseout", mouseout)
-          .transition().duration(2000).attr("opacity",.7)
-    
-            //adding the below code removes all circles
-            // .style("opacity",0)
-              // .transition.duration(2000).style("opacity",.7)
+          circle.attr("class", function(d,i) { 
+              if (d.Engagement === "Full") { return "full"}
+              else if ( d.Engagement === "Partial: CMT 1") { return "partialcmt1" }
+              else if ( d.Engagement === "Partial: CMT 2") { return "partialcmt2" }
+              else if ( d.Engagement === "Partial: Training 1") { return "partialt1" }
+              else if ( d.Engagement === "Partial: Training 2") { return "partialt2" }
+              else if ( d.Engagement === "Zero") { return "zero" }
+            }) 
+            .on("mouseover", mouseover)
+            .on("mouseout", mouseout)
 
-        circle.enter().append("circle")
-         .attr("class", function (d) { return circleEngagement(d) })
-         .on("mouseover", mouseover)
-         .on("mouseout", mouseout)
-         .attr("transform", function(d) { 
-          return "translate(" + projection([+d.Longitude, +d.Latitude]) + ")" })
-           //original code below, however cities not being mapped correctly
-           //Longitude must be first in the sequence
-           // .attr("cx", function(d) { return projection([d.Longitude, d.Latitude])[0];})
-           // .attr("cy", function(d) { return projection([d.Longitude, d.Latitude])[1]; })
-         
-           // .attr("cx", function(d) { return projection([d.Longitude])[0];})
-           // .attr("cy", function(d) { return projection([d.Latitude])[0];})
-         .attr("r", 5)
-         .on("click", update)
-         .attr("opacity",0)
-          .transition().duration(2000).attr("opacity",.7)
+          circle.enter().append("circle")
+           .attr("class", function(d,i) { 
+              if (d.Engagement === "Full") { return "full"}
+              else if ( d.Engagement === "Partial: CMT 1") { return "partialcmt1" }
+              else if ( d.Engagement === "Partial: CMT 2") { return "partialcmt2" }
+              else if ( d.Engagement === "Partial: Training 1") { return "partialt1" }
+              else if ( d.Engagement === "Partial: Training 2") { return "partialt2" }
+              else if ( d.Engagement === "Zero") { return "zero" }
+            }) 
+            .on("mouseover", mouseover)
+            .on("mouseout", mouseout)
+           .attr("cx", function(d) { return projection([d.Longitude, d.Latitude])[0];})
+           .attr("cy", function(d) { return projection([d.Longitude, d.Latitude])[1]; })
+           .attr("r", 5)
+           .on("click", update)
+           .style("opacity",0)
+            .transition().duration(2000).style("opacity",1)
+
+
+          //.style("fill", function(d,i) { return color(d.Engagement)})
+          // .style("fill", function(d,i) { return color(d.Engagement)})//this will filter color later on
+           // .style("fill", function(d,i) { 
+           //    if (d.Engagement === "Full") { return "grey"}
+           //    else if ( d.Engagement === "Partial: CMT 1") { return "blue" }
+           //    else if ( d.Engagement === "Partial: CMT 2") { return "red" }
+           //    else if ( d.Engagement === "Partial: Training 1") { return "purple" }
+           //    else if ( d.Engagement === "Partial: Training 2") { return "pink" }
+           //    else if ( d.Engagement === "Zero") { return "orange" }
+           //  })
+           // .style("opacity", 0.75)
 
           circle.exit()
-            .transition().duration(2000).attr("opacity",.2)
+            .transition().duration(2000).style("opacity",0)
             .remove()
 
          var tooltip = d3.select("body").append('tooltiptext')
@@ -148,16 +167,7 @@ d3.json("/data/world.json", function(error, world) {
             .style("background", "white")
             .style("opacity", 0)
 
-        function circleEngagement(d) {
-            console.log(d)
-               if (d.Engagement === "Full") { return "full"}
-              else if ( d.Engagement === "Partial: CMT 1") { return "partialcmt1" }
-              else if ( d.Engagement === "Partial: CMT 2") { return "partialcmt2" }
-              else if ( d.Engagement === "Partial: Training 1") { return "partialt1" }
-              else if ( d.Engagement === "Partial: Training 2") { return "partialt2" }
-              else if ( d.Engagement === "Zero") { return "zero" }
-            }
-        
+
 
         function update(d) {
               if(currentcircle) {
@@ -187,7 +197,6 @@ d3.json("/data/world.json", function(error, world) {
                   string = string + "<hr>"
                   string = string + "Engagement: "
                   string = string + d["Engagement"]
-
               
               tooltip.html(function() { return string
               })
@@ -213,12 +222,6 @@ d3.json("/data/world.json", function(error, world) {
                   string = string + "<hr>"
                   string = string + "Engagement: "
                   string = string + d["Engagement"]
-                  string = string + "<br>"
-                  string = string + "Lat: " 
-                  string = string + d["Latitude"]
-                  string = string + "<br>"
-                  string = string + "Lon: " 
-                  string = string + d["Longitude"]
 
           tooltip.transition().duration(20)
             .style('opacity', .9)
@@ -244,13 +247,4 @@ d3.json("/data/world.json", function(error, world) {
   });
 });
 
-
-          // circle.attr("class", function(d,i) { 
-          //     if (d.Engagement === "Full") { return "full"}
-          //     else if ( d.Engagement === "Partial: CMT 1") { return "partialcmt1" }
-          //     else if ( d.Engagement === "Partial: CMT 2") { return "partialcmt2" }
-          //     else if ( d.Engagement === "Partial: Training 1") { return "partialt1" }
-          //     else if ( d.Engagement === "Partial: Training 2") { return "partialt2" }
-          //     else if ( d.Engagement === "Zero") { return "zero" }
-          //   })
 
