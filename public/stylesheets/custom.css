@@ -1,3 +1,7 @@
+.container {
+	width: 1200px;
+}
+
 footer {
 	height: 30px;
 	width: 100%;
@@ -14,6 +18,68 @@ hr {
 	padding: 0px;
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+
+.example.group {
+	padding-bottom:40px;
+	float:left;
+	border: solid 1px #ddd;
+	margin-left:5px;
+	margin-bottom:5px;
+/*	width:400px;
+	height:300px;*/
+}
+
+.example img {
+	margin-left: auto;
+	margin-right:auto;
+	height:100%;
+	width:100%;
+}
+
+.example.group #worldmap{
+	/*padding:10px;*/
+	width:550px;
+	height:300px;
+	overflow:hidden;
+
+}
+
+/*.example.group:nth-of-type(2) {
+	padding-left:30px;
+	width:300px;
+}*/
+
+.example.group #bubble {
+	height:300px;
+	width:300px;
+}
+
+.example.group #stackedbarchart {
+	height:300px;
+	width:410px;
+
+}
+
+.example.group #horizontalbarchart {
+	height:300px;
+	width:400px;
+	margin-left:40px;
+}
+
+
+.example h3{
+	padding:10px;
+	text-align: center;
+}
+
+.examples{
+
+}
+
+.layout{
+	padding-left:0px;
+	padding-right:0px;
 }
 
 .layout.footer {
@@ -173,7 +239,7 @@ stroke: white; stroke-width: 0.75px; fill: lightgrey;
 .legendselected{
 		font-weight: bold;
 		font-size: 10px;
-
 }
+
 
 
