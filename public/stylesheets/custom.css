@@ -2,6 +2,10 @@
 	width: 1200px;
 }
 
+#leftnav {
+	padding-top:40px;
+}
+
 footer {
 	height: 30px;
 	width: 100%;
@@ -19,6 +23,25 @@ hr {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+ul.nav.nav-tabs{
+	border: 1px solid #124b5e;
+	width:200px;
+
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+	border:none;
+}
+
+.nav-tabs>li>a {
+	text-align:left;
+	padding-left:0px;
+}
+
+ #programoverview {
+ 	width:1000px
+ }
 
 .example.group {
 	padding-bottom:40px;
@@ -159,8 +182,12 @@ stroke: white; stroke-width: 0.75px; fill: lightgrey;
 .nav-tabs {
 	padding-left: 30px;
 	border-bottom: white;
+	border: 1px solid #124b5e;
 }
 
+.nav-tabs.li.active{
+
+}
 
 .nav-tabs a{
 	text-decoration: none;
