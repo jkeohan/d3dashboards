@@ -26,7 +26,7 @@ var svg = d3.select(".stackedbarchart").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 /////////////////////////////////////////
-d3.csv("../data/cm.csv", function(error, data) {
+d3.csv("../data/cm_sampledata.csv", function(error, data) {
 
   build_chart((group_by_region(data))) 
 
