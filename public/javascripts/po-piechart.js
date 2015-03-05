@@ -7,7 +7,7 @@
   .domain(["Full","Partial: CMT 1","Partial: CMT 2","Partial: Training 1", "Partial: Training 2", "Zero"])
   .range(["green","blue","lightblue","orange","yellow","red"])
 
-			d3.csv("../data/cm.csv", function(error, data) {
+			d3.csv("../data/cm_sampledata.csv", function(error, data) {
 
 				var engagement = [];
 

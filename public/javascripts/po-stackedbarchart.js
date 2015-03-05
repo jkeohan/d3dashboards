@@ -1,7 +1,7 @@
 
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width_stackedbar = 500 - margin.left - margin.right,
+    width_stackedbar = 700 - margin.left - margin.right,
     height_stackedbar = 300 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal().rangeRoundBands([0, width_stackedbar], .1);
@@ -27,7 +27,7 @@ var stackedbar = d3.select(".stackedbarchart").append("svg")
    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 /////////////////////////////////////////
-d3.csv("../data/cm.csv", function(error, data) {
+d3.csv("../data/cm_sampledata.csv", function(error, data) {
 
   build_chart((group_by_region(data))) 
 
