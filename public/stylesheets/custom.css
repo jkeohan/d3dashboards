@@ -260,6 +260,23 @@ stroke: white; stroke-width: 0.75px; fill: lightgrey;
 
 .xaxis {
 	font-size: 8px;
+	stroke-width: 1;
+}
+
+.xaxis path,
+.xaxis line {
+  fill: none;
+  stroke: #000;
+  stroke-width:1;
+  shape-rendering: crispEdges;
+}
+
+.yaxis path,
+.yaxis line {
+  fill: none;
+  stroke: #000;
+  stroke-width:1;
+  shape-rendering: crispEdges;
 }
 
 .legend {
@@ -278,4 +295,5 @@ stroke: white; stroke-width: 0.75px; fill: lightgrey;
 .group.followme {
 	float: right;
 }
+
 
