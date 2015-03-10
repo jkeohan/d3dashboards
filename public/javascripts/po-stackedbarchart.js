@@ -185,7 +185,7 @@ data.forEach(function(d) {
       .ease('elastic')
 
    function mouseover(d) {
-    //console.log(d)
+    console.log(d)
          var string = "";
                   string = string + "<strong>";
                   string = string + "Engagement: " + "</strong>";
@@ -193,7 +193,7 @@ data.forEach(function(d) {
                   string = string + "<br>";
                   string = string + "<hr>"
                   string = string + "Total: "
-                  string = string + d["Engagement"]
+                  string = string + (d.y1 - d.y0);
 
           tooltip.transition().duration(20)
             .style('opacity', .9)
