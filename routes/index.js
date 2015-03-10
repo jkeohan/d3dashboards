@@ -57,6 +57,10 @@ router.get('/dashboards/:dashboardid', function(req,res) {
 	})
 })
 
+router.get('/api/scdata', function(req,res){ 
+	console.log(appdata)
+		res.json(appdata)
+	})
 
 
 

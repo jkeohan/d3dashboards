@@ -37,6 +37,10 @@
     "shortname" : "LinkdIN",
     "img" : "/images/socialmedia/linkedin.png",
     "url" : "http://www.LinkdIN.com/in/jkeohan/"
+  },{
+    "shortname" : "Wordpress",
+    "img" : "/images/socialmedia/wordpress.png",
+    "url" : "https://jkeohan.wordpress.com/"
   }],
 
   "meeting" : {

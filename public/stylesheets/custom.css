@@ -43,6 +43,10 @@ ul.nav.nav-tabs{
  	width:1000px
  }
 
+ .col-md-12.po-worldmap {
+ 	width:1000px;
+ }
+
 .example.group {
 	padding-bottom:40px;
 	float:left;
@@ -175,6 +179,10 @@ stroke: white; stroke-width: 0.75px; fill: lightgrey;
 	color:white;
 }
 
+.navigation {
+	color: #fcf4dc;
+}
+
 .navigation .nav{
 	font-size: 15px;
 }
@@ -268,5 +276,7 @@ stroke: white; stroke-width: 0.75px; fill: lightgrey;
 		font-size: 10px;
 }
 
-
+.group.followme {
+	float: right;
+}
 

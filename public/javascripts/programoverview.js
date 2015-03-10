@@ -1,4 +1,4 @@
-var width = 800;
+var width = 900;
 var height = 375;
 var map = void 0; // Update global
 
@@ -65,7 +65,7 @@ d3.json("/data/world.json", function(error, world) {
           // d3.select('.legendselected').select("text").classed("texteselected",true)
   
       legend.append('rect')
-        .attr("x", 110)
+        .attr("x", 130)
         .attr("y", height - 150)
         .attr("width", 10)
         .attr("height", 10)
@@ -73,7 +73,7 @@ d3.json("/data/world.json", function(error, world) {
         .style("fill", color )
 
       legend.append('text')
-        .attr("x", 100)
+        .attr("x", 120)
         .attr("y", height - 145)
         .attr("dy", ".35em")
         .text(function(d,i) { return d})
