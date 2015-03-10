@@ -1,5 +1,9 @@
+
 .container {
-	width: 1200px;
+	padding-bottom: 10px;
+	margin-left: 50px;
+	margin-right: 50px;
+		width: 1200px;
 }
 
 #leftnav {
@@ -114,12 +118,7 @@ ul.nav.nav-tabs{
 	margin-right: 50px;
 }
 
-.container {
-	padding-bottom: 100px;
-	padding; 10px;
-	margin-left: 50px;
-	margin-right: 50px;
-}
+
 
 .wrapper {
 	min-height: 100%;
