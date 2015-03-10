@@ -143,13 +143,23 @@ data.forEach(function(d) {
       .attr("class", "g")
       .attr("transform", function(d) { return "translate(" + x(d.region) + ",0)"; });
 
-  region.selectAll("rect")
+  var rect = region.selectAll("rect")
       .data(function(d) {  return d.engagement; })
       .enter().append("rect")
       .attr("width", x.rangeBand())
-      .attr("y", function(d) {  return y(d.y1) })
-      .attr("height", function(d) {  return y(+d.y0) - y(+d.y1) })
+      .attr("y",height)
+      //.attr("y", function(d) {  return y(d.y1) })
+      .attr("height",0)
+      //.attr("height", function(d) {  return y(+d.y0) - y(+d.y1) })
       .style("fill", function(d) { return color(d.name)}); 
+
+  rect.transition().duration(3000)
+      .attr("height", function(d) {  return y(+d.y0) - y(+d.y1) })
+      .attr("y", function(d) {  return y(d.y1) })
+      .delay(function(d, i) {
+            return i * 20;
+        })
+      .ease('elastic')
 
   var legend = svg.selectAll(".legend")
       .data(color.domain().slice())
