@@ -4,6 +4,19 @@
         <li><a href="/"><i class="icon-home"></i> Home</a></li>
         <li><a href="/examples"><i class="icon-white icon-picture"></i> Examples</a></li>
       </ul><!-- nav -->
+		
+				
+		<article class="socialmediaicons">
+   <span class="title">Follow Me: &nbsp </span>
+  <ul class="group">
+    <% appdata.social.forEach(function(item) { %>
+      <li><a href="<%= item.url %>"><img class="icon" src="<%= item.img %>" alt="icon for <%= item.shortname %>"></a></li>
+    <% }); %>
+  </ul>
+</article>
+
     </section><!-- layout -->
+
   </div><!-- navigation -->
+
 </header>

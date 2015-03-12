@@ -184,6 +184,12 @@ stroke: white; stroke-width: 0.75px; fill: lightgrey;
 
 .navigation .nav{
 	font-size: 15px;
+	float:left;
+	
+}
+
+ul.nav {
+	margin-top: 5px !important;
 }
 
 .nav-tabs {
@@ -296,4 +302,11 @@ stroke: white; stroke-width: 0.75px; fill: lightgrey;
 	float: right;
 }
 
+.socialmediaicons {
+	float:right;
+}
 
+.socialmediaicons .title {
+	font-size:15px;
+	margin-top: 10px
+}
