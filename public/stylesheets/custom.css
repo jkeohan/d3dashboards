@@ -285,12 +285,29 @@ ul.nav {
   shape-rendering: crispEdges;
 }
 
+.axis path,
+.axis line {
+	fill:none;
+	stroke:grey;
+	stroke-width:1;
+	shape-rendering: crispEdges;
+}
+
 .legend {
 	cursor: pointer
 }
 
 .rectangleselected { 
 
+}
+
+.rect {
+  cursor: pointer;
+  stroke-width: 2 !important;
+}
+
+.disabled{
+  fill:transparent !important;
 }
 
 .legendselected{
@@ -309,4 +326,8 @@ ul.nav {
 .socialmediaicons .title {
 	font-size:15px;
 	margin-top: 10px
+}
+
+.Full {
+	fill:green;
 }

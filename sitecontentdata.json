@@ -19,6 +19,11 @@
     "friendlyname" : "Horizonal Bar Chart",
     "js": "horizontalbarchart.js",
     "pic": "/images/examples/horizonalbar.png"
+  },{
+    "title" : "activekidsgraph",
+    "friendlyname" : "Active Kids Graph",
+    "js": "activekids.js",
+    "pic": "/images/examples/horizonalbar.png"
   }],
 
   "dashboards": [{

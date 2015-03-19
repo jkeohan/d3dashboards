@@ -69,8 +69,24 @@ d3.json("/data/world.json", function(error, world) {
         .attr("y", height - 150)
         .attr("width", 10)
         .attr("height", 10)
-        .attr("class","rectangleselected")
+        .attr("class","rect enabled")
         .style("fill", color )
+        .style("stroke",color)
+        .on("click", function(d) {
+          var legendChoice = d;
+          console.log(d)
+          var rect = d3.select(this); 
+          //console.log(rect)
+          var enabled = true;
+          if(rect.attr("class") !== "disabled") {
+              rect.attr('class','disabled')
+            RemoveLegendChoice(d)
+          } else { rect.attr("class","enabled") 
+            AddLegendChoice(d)
+            }
+           // var newData = (currentData.filter(function(d) { return d.Engagement !== legendChoice } ))
+           //  populateMap(newData)
+        })
 
       legend.append('text')
         .attr("x", 110)
@@ -85,25 +101,176 @@ d3.json("/data/world.json", function(error, world) {
         //     var newData = (currentData.filter(function(d) { return d.Engagement === legendChoice } ))
         //     populateMap(newData)
         //    })
-         .on("click", function(d,i) { 
-            //console.log(d)
-            var legendChoice = d
+         // .on("click", function(d,i) { 
+         //    //console.log(d)
+         //    var legendChoice = d
 
-            d3.selectAll(".legendselected").classed("legendselected", false)
-              .transition().duration(2000).style("font-size",10)
-            // d3.selectAll(".rectangleselected").classed("rectangleselected", false)
-            //   .transition().duration(2000).style("opacity",0.2)
+         //    d3.selectAll(".legendselected").classed("legendselected", false)
+         //      .transition().duration(2000).style("font-size",10)
+         //    // d3.selectAll(".rectangleselected").classed("rectangleselected", false)
+         //    //   .transition().duration(2000).style("opacity",0.2)
 
-            d3.select(this).classed("legendselected",true)
-               .transition().duration(2000)
-                .style("font-size",12)
+         //    d3.select(this).classed("legendselected",true)
+         //       .transition().duration(2000)
+         //        .style("font-size",12)
          
-            var newData = (currentData.filter(function(d) { return d.Engagement === legendChoice } ))
-            populateMap(newData)
-           })
+         //    var newData = (currentData.filter(function(d) { return d.Engagement === legendChoice } ))
+         //    populateMap(newData)
+         //   })
         
 
       populateMap(currentData)
+
+     function RemoveLegendChoice(circledata) {
+        //console.log(circledata)
+        //DATA JOIN...Join new data with old elements if any
+        var circle =  svg.selectAll("circle").filter(function(d) { return d.Engagement === circledata})
+          .attr("class","disabled")
+        
+      }
+
+      function AddLegendChoice(circledata) {
+         var circle =  svg.selectAll("circle").filter(function(d) { return d.Engagement === circledata})
+          .attr("class", function (d) { return circleEngagement(d) + " engaged" })
+      }
+
+         function circleEngagement(d) {
+            //console.log(d)
+               if (d.Engagement === "Full") { return "full"}
+              else if ( d.Engagement === "Partial: CMT 1") { return "partialcmt1" }
+              else if ( d.Engagement === "Partial: CMT 2") { return "partialcmt2" }
+              else if ( d.Engagement === "Partial: Training 1") { return "partialt1" }
+              else if ( d.Engagement === "Partial: Training 2") { return "partialt2" }
+              else if ( d.Engagement === "Zero") { return "zero" }
+        }//circleEngagement
+        
+        //  //   .data(circledata).attr("opacity",0)
+
+        //  circle.attr("class", function (d) { return circleEngagement(d) })
+        //   .on("mouseover", mouseover)
+        //   .on("mouseout", mouseout)
+        //   .transition().duration(2000).attr("opacity",.7)
+    
+        //     //adding the below code removes all circles
+        //     // .style("opacity",0)
+        //       // .transition.duration(2000).style("opacity",.7)
+        // //ENTER
+        // circle.enter().append("circle")
+
+        // //UPDATE
+        // circle
+        //  .attr("class", function (d) { return circleEngagement(d) })
+        //  .on("mouseover", mouseover)
+        //  .on("mouseout", mouseout)
+        //  .attr("transform", function(d) { 
+        //   return "translate(" + projection([+d.Longitude, +d.Latitude]) + ")" })
+        //    //original code below, however cities not being mapped correctly
+        //    //Longitude must be first in the sequence
+        //    // .attr("cx", function(d) { return projection([d.Longitude, d.Latitude])[0];})
+        //    // .attr("cy", function(d) { return projection([d.Longitude, d.Latitude])[1]; })
+        //    // .attr("cx", function(d) { return projection([d.Longitude])[0];})
+        //    // .attr("cy", function(d) { return projection([d.Latitude])[0];})
+        //  .attr("r", 5)
+        //  .on("click", update)
+        //  .attr("opacity",0)
+        //   .transition().duration(2000).attr("opacity",.7)
+
+        //   circle.exit()
+        //     .transition().duration(2000).attr("opacity",.2)
+        //     .remove()
+
+        //  var tooltip = d3.select("body").append('tooltiptext')
+        //     .style("position", 'absolute')
+        //     .style("padding", '10px 10px')
+        //     .style("background", "white")
+        //     .style("opacity", 0)
+
+        // function circleEngagement(d) {
+        //     //console.log(d)
+        //        if (d.Engagement === "Full") { return "full"}
+        //       else if ( d.Engagement === "Partial: CMT 1") { return "partialcmt1" }
+        //       else if ( d.Engagement === "Partial: CMT 2") { return "partialcmt2" }
+        //       else if ( d.Engagement === "Partial: Training 1") { return "partialt1" }
+        //       else if ( d.Engagement === "Partial: Training 2") { return "partialt2" }
+        //       else if ( d.Engagement === "Zero") { return "zero" }
+        // }//circleEngagement
+        
+        // function update(d) {
+        //       if(currentcircle) {
+        //           currentcircle.transition().duration(2000).attr("r", 5) 
+        //         }
+        //       //console.log(d)
+        //       currentcircle = d3.select(this)
+
+        //       //console.log(d3.select(this))
+        //       d3.select(this)
+        //       .style("opacity",1)
+        //       .classed("selected",true)
+        //       .transition()
+        //         .duration(2000)
+        //         .attr("r", 15)
+
+        //       tooltip.transition().duration(2000)
+        //           .style('opacity', .9)
+
+        //       var string = "";
+        //           string = string + "<strong>";
+        //           string = string + "Site: " + "</strong>";
+        //           string = string + d["Site Code"];
+        //           string = string + "<br>";
+        //           string = string + "City: "
+        //           string = string + d["City"]
+        //           string = string + "<hr>"
+        //           string = string + "Engagement: "
+        //           string = string + d["Engagement"]
+
+              
+        //       tooltip.html(function() { return string
+        //       })
+        //        .style('left', (d3.event.pageX + 25) + 'px')
+        //        .style('top',  (d3.event.pageY - 30) + 'px')
+        //        .style({ "font-size": "15px", "line-height": "normal"})
+        //        .style({"border": "solid 1px black"})
+        // }//update
+
+        // var currentcircle;
+
+        // function mouseover(d) {
+        //    var string = "";
+        //             string = string + "City: "
+        //             string = string + d["City"]
+        //             string = string + "<br>"
+        //             string = string + "Country: "
+        //             string = string + d["Country"]
+        //             string = string + "<hr>"
+        //             string = string + "Engagement: "
+        //             string = string + d["Engagement"]
+        //             string = string + "<br>"
+        //             string = string + "Lat: " 
+        //             string = string + d["Latitude"]
+        //             string = string + "<br>"
+        //             string = string + "Lon: " 
+        //             string = string + d["Longitude"]
+
+        //     tooltip.transition().duration(20)
+        //       .style('opacity', .9)
+
+        //     tooltip.html(function() { 
+        //       return string
+        //     //return "<strong>" + "Site: " + "</strong>" + d["Site Code"] + "<br>" + "City: " + d["City"] + "</strong>";
+        //     })
+        //    .style('left', (d3.event.pageX + 25) + 'px')
+        //    .style('top',  (d3.event.pageY - 30) + 'px')
+        //    .style({ "font-size": "15px", "line-height": "normal"})
+        // }//mouseover
+
+        // function mouseout(d) {
+        //   tooltip.transition().duration(20)
+        //     .style('opacity',0)
+        // }//mouseout
+
+      
+
 
       function populateMap(circledata) {
         //console.log(circledata)
@@ -124,7 +291,7 @@ d3.json("/data/world.json", function(error, world) {
 
         //UPDATE
         circle
-         .attr("class", function (d) { return circleEngagement(d) })
+         .attr("class", function (d) { return circleEngagement(d) + " enabled" })
          .on("mouseover", mouseover)
          .on("mouseout", mouseout)
          .attr("transform", function(d) { 
@@ -151,16 +318,15 @@ d3.json("/data/world.json", function(error, world) {
             .style("opacity", 0)
 
         function circleEngagement(d) {
-            console.log(d)
+            //console.log(d)
                if (d.Engagement === "Full") { return "full"}
               else if ( d.Engagement === "Partial: CMT 1") { return "partialcmt1" }
               else if ( d.Engagement === "Partial: CMT 2") { return "partialcmt2" }
               else if ( d.Engagement === "Partial: Training 1") { return "partialt1" }
               else if ( d.Engagement === "Partial: Training 2") { return "partialt2" }
               else if ( d.Engagement === "Zero") { return "zero" }
-            }
+        }//circleEngagement
         
-
         function update(d) {
               if(currentcircle) {
                   currentcircle.transition().duration(2000).attr("r", 5) 
@@ -197,50 +363,50 @@ d3.json("/data/world.json", function(error, world) {
                .style('top',  (d3.event.pageY - 30) + 'px')
                .style({ "font-size": "15px", "line-height": "normal"})
                .style({"border": "solid 1px black"})
-        }
+        }//update
 
-         var currentcircle;
+        var currentcircle;
 
-      function mouseover(d) {
-         var string = "";
-                  string = string + "City: "
-                  string = string + d["City"]
-                  string = string + "<br>"
-                  string = string + "Country: "
-                  string = string + d["Country"]
-                  string = string + "<hr>"
-                  string = string + "Engagement: "
-                  string = string + d["Engagement"]
-                  string = string + "<br>"
-                  string = string + "Lat: " 
-                  string = string + d["Latitude"]
-                  string = string + "<br>"
-                  string = string + "Lon: " 
-                  string = string + d["Longitude"]
+        function mouseover(d) {
+           var string = "";
+                    string = string + "City: "
+                    string = string + d["City"]
+                    string = string + "<br>"
+                    string = string + "Country: "
+                    string = string + d["Country"]
+                    string = string + "<hr>"
+                    string = string + "Engagement: "
+                    string = string + d["Engagement"]
+                    string = string + "<br>"
+                    string = string + "Lat: " 
+                    string = string + d["Latitude"]
+                    string = string + "<br>"
+                    string = string + "Lon: " 
+                    string = string + d["Longitude"]
 
+            tooltip.transition().duration(20)
+              .style('opacity', .9)
+
+            tooltip.html(function() { 
+              return string
+            //return "<strong>" + "Site: " + "</strong>" + d["Site Code"] + "<br>" + "City: " + d["City"] + "</strong>";
+            })
+           .style('left', (d3.event.pageX + 25) + 'px')
+           .style('top',  (d3.event.pageY - 30) + 'px')
+           .style({ "font-size": "15px", "line-height": "normal"})
+        }//mouseover
+
+        function mouseout(d) {
           tooltip.transition().duration(20)
-            .style('opacity', .9)
+            .style('opacity',0)
+        }//mouseout
 
-          tooltip.html(function() { 
-            return string
-          //return "<strong>" + "Site: " + "</strong>" + d["Site Code"] + "<br>" + "City: " + d["City"] + "</strong>";
-        })
-         .style('left', (d3.event.pageX + 25) + 'px')
-         .style('top',  (d3.event.pageY - 30) + 'px')
-         .style({ "font-size": "15px", "line-height": "normal"})
-        }
-
-      function mouseout(d) {
-        tooltip.transition().duration(20)
-          .style('opacity',0)
       }
-
-    }
 
         var currentcircle; 
     
-  });
-});
+  });//csv
+});//json
 
 
           // circle.attr("class", function(d,i) { 

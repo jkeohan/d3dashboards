@@ -1,0 +1,63 @@
+.axis path,
+.axis line {s
+  fill:none;
+  stroke:grey;
+  stroke-width:1;
+  shape-rendering: crispEdges;
+}
+
+.activekidsgraph {
+	float: left;
+	font-size: 15px;
+}
+.Details {
+	margin-top:20px;
+/*	width: 300px;*/
+	float: left;
+}
+.activityDetails {
+	margin-top:20px;
+	width:300px;
+	float:left;
+
+
+}
+
+.activityDetails h2 {
+		color: #1f7f9e;
+}
+
+.activityDetailsDate h2 {
+	text-align: center;
+	border: solid 1px rgba(255, 127, 14,0.5);
+	padding:10px;
+}
+
+.activityDetailsInfo { 
+
+}
+
+.activityImage {
+	padding: 10px;
+/*	margin-left: 40px;*/
+	height: 300px;
+	text-align:center;
+	margin-top:40px;
+}
+
+.activityImage img{
+	height:100%;
+}
+
+.nav-details li a{
+	display:inline;
+	float:left;
+	font-size: 16px;
+	text-decoration: none;
+	border: solid 1px black;
+	margin-top: 10px;
+	margin-left:12px;
+	padding-left:10px;
+	padding-right:10px;
+
+}
