@@ -19,12 +19,14 @@ body {
 /*adding position without width @ 100% will decrease the 
 width of footer to it's content. 
 http://www.cssreset.com/how-to-keep-footer-at-bottom-of-page-with-css/
+
+http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page
 */
 footer {
 	height: 30px;
 	width: 100%;
-	position: absolute; 
-	bottom:0;
+/*	position: absolute; 
+	bottom:0;*/
 }
 
 hr {
