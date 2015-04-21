@@ -23,7 +23,7 @@ var projection = d3.geo.mercator()
 var path = d3.geo.path()
     .projection(projection);
 
-var svg = d3.select(".worldmap").append("svg")
+var svg = d3.select(".po-worldmap").append("svg")
     .attr("width", width)
     .attr("height", height)
 
@@ -283,6 +283,4 @@ d3.json("/data/world.json", function(error, world) {
     
   });//csv
 });//json
-
-
 

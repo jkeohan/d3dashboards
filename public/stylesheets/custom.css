@@ -239,32 +239,42 @@ ul.nav {
 }
 
 .full {
-	fill: green;
+	/*fill: green;*/
+	fill:#296629;
 }
 
 .partialcmt1 {
-	fill: blue;
+	/*fill: blue;*/
+	fill: #337F33;
 }
 
 .partialcmt2 {
-	fill: steelblue;
+	/*fill: steelblue;*/
+	fill: #33A626;
 }
 
 .partialt1 {
-	fill: orange;
+	/*fill: orange;*/
+	fill:#9AB900;
 }
 
 .partialt2 {
-	fill: yellow;
+	/*fill: yellow;*/
+	fill: #B8B800;
 }
 
 .zero {
-	fill: red;
+	/*fill: red;*/
+	fill:#CECE06;
 }
 
 .tooltiptext {
 	border-color: solid 1px black;
 }
+
+.tooltip {
+	 border-radius: 12px;
+	} 
 
 .stackedbarchart {
 	width: 500px;

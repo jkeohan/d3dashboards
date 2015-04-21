@@ -28,6 +28,7 @@ d3.json("/data/world.json", function(error, world) {
       .attr("class", function(d) { return "subunit " + d.id; })
       .attr("d", path)
         .style({
+          
           stroke:"white",
           "stroke-width": 0.75,
           fill: "lightgrey"

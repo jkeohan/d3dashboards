@@ -65,7 +65,6 @@ var color = d3.scale.category10();
 var xScale = d3.time.scale()
 var yScale = d3.scale.linear()
 
-
 //axes
 var xAxis = d3.svg.axis()
 	.scale(xScale)
@@ -75,8 +74,6 @@ var xAxis = d3.svg.axis()
 var yAxis = d3.svg.axis()
 	.scale(yScale)
 	.orient("left")
-
-
 
 //static d3 selectors...create the graph structure
 var graph = d3.select(".activekidsgraph")
@@ -94,6 +91,12 @@ var tooltip = d3.select("body").append('tooltiptext')
   //.style("background", "white")
   //.style("opacity", 0)
 
+//main data driven function
+data = activities
+data.forEach(function(d) {
+		d.date = parseDate(d.date);
+		d.miles = +d.miles;
+	})
 
 //valueLine
 var valueLine = d3.svg.line()
@@ -101,12 +104,7 @@ var valueLine = d3.svg.line()
 		.y(function(d) { return yScale(d.miles)})
 		//.interpolate("basis")
 
-//main data driven function
-data = activities
-data.forEach(function(d) {
-		d.date = parseDate(d.date);
-		d.miles = +d.miles;
-	})
+
 
 	//update scales
 	xScale
