@@ -78,15 +78,25 @@ router.get('/dashboards/:dashboardid', function(req,res) {
 	appdata.dashboards.forEach(function(item) {
 		if(item.title === req.params.dashboardid) {
 			example.push(item)
-			console.log(example[0].friendlyname)
+			//console.log(example[0].friendlyname)
+			console.log(example[0])
 		}
 	})
-	res.render('programoverview', {
-		friendlyname:  example[0].friendlyname,
-		worldmap: example[0].worldmap
-		// piechart: example[0].piechart,
-		// stackedbar: example[0].stackedbarchart
-	})
+		if(example[0].title === "renewableenergy") {
+				res.render('renewableenergy', {
+				friendlyname:  example[0].friendlyname,
+				worldmap: example[0].worldmap
+				// piechart: example[0].piechart,
+				// stackedbar: example[0].stackedbarchart
+				})
+		} else if (example[0].title === "programoverview") {
+				res.render('programoverview', {
+					friendlyname:  example[0].friendlyname,
+					worldmap: example[0].worldmap
+					// piechart: example[0].piechart,
+					// stackedbar: example[0].stackedbarchart
+				})
+		}
 })
 
 router.get('/api/scdata', function(req,res){ 

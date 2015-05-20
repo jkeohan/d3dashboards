@@ -53,8 +53,8 @@ path {
 }
 
 line-chart{
-	width:100%;
-	height:100%;
+	width:600px;
+	height:500px;
 	position:absolute;
 }
 
@@ -207,8 +207,7 @@ app.directive('lineChart', function() {
 
 	//static d3 selectors...create the graph structure
 	// var graph = d3.select(".activekidsgraph")
-	var graph = d3.select(el)
-		.append("svg")
+	var graph = d3.select(el).append("svg")
 			.attr("height", height + margin.top + margin.bottom)
 			.attr("width", width + margin.left + margin.right)
 		.append("g")
@@ -230,7 +229,7 @@ app.directive('lineChart', function() {
 			//.interpolate("basis")
 
 	//main data driven function
-	// data = activities
+	// data = activitiesx
 	data = activities
 	data.forEach(function(d) {
 				d.date = parseDate(d.date);
@@ -256,6 +255,8 @@ app.directive('lineChart', function() {
 	var dataNest = d3.nest()
 			.key(function(d) { return d.type})
 			.entries(data)
+
+	console.log(dataNest)
 
 	var legendSpace = (width/dataNest.length)/2
 

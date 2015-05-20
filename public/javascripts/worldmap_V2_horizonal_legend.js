@@ -23,7 +23,7 @@ var projection = d3.geo.mercator()
 var path = d3.geo.path()
     .projection(projection);
 
-var svg = d3.select(".po-worldmap").append("svg")
+var svg = d3.select(".worldmap").append("svg")
     .attr("width", width)
     .attr("height", height)
 
@@ -45,55 +45,65 @@ d3.json("/data/world.json", function(error, world) {
       //currentData will be used for filtering based on legend options. 
       //var currentData = data//.map(function(d) { return d.Engagement == "*"})
        var currentData = data//.filter(function(d) { return d.Engagement  === "Full"})
-
-      var legendVals = d3.set(data.map(function(d) { return d.Engagement } )).values()
-      function EngagementVals() {
-        var engaged = d3.set(data.map(function(d) { return d.Engagement } )).values()
-        return engaged
-      }
-
-      var legend = svg.selectAll('.legend')
-        .data(EngagementVals().slice().sort())
-        .enter().append('g')
-        .attr("class", "legend")
-        .attr("transform", function(d,i ) {
-          {return "translate(0," + i * 20 + ")"}
-        })
-
-      legend.append('rect')
-        .attr("x", 120)
-        .attr("y", height - 150)
-        .attr("width", 10)
-        .attr("height", 10)
-        .attr("class","rect enabled")
-        .style("fill", color )
-        .style("stroke",color)
-        .on("click", function(d) {
-          var legendChoice = d;
-          var rect = d3.select(this); 
-          //console.log(rect)
-          var enabled = true;
-          if(rect.attr("class") !== "disabled") {
-              rect.attr('class','disabled')
-            RemoveLegendChoice(d)
-          } else { rect.attr("class","enabled") 
-            AddLegendChoice(d)
-            }
-           // var newData = (currentData.filter(function(d) { return d.Engagement !== legendChoice } ))
-           //  populateMap(newData)
-          //d3.selectAll("." + legendChoice + "." + "regions_rect").transition().style("opacity",0)
-        })
-
-      legend.append('text')
-        .attr("x", 110)
-        .attr("y", height - 145)
-        .attr("dy", ".35em")
-        .text(function(d,i) { return d})
-        .attr("class","textselected")
-        .style("text-anchor", "end")
-        .style("font-size", 10)
     
       populateMap(currentData)
+      createLegend(data)
+
+     function createLegend(data) {
+        //var legendVals = d3.set(data.map(function(d) { return d.Engagement } )).values()
+
+        function EngagementVals() {
+          var engaged = d3.set(data.map(function(d) { return d.Engagement } )).values()
+          return engaged
+        }
+
+        var legend = svg.selectAll('.legend')
+          .data(EngagementVals().slice().sort())
+          .enter().append('g')
+          .attr("class", "legend")
+          .attr("transform", function(d,i ) {
+            var text = d
+            console.log(text)
+   
+            {return "translate(0," + i * 20 + ")"}
+          })
+
+          console.log(legend)
+
+        legend.append('rect')
+          .attr("x", 120)
+          .attr("y", height - 150)
+          .attr("width", 10)
+          .attr("height", 10)
+          .attr("class","rect enabled")
+          .style("fill", color )
+          .style("stroke",color)
+          .on("click", function(d) {
+            var legendChoice = d;
+            console.log(d)
+            var rect = d3.select(this); 
+            //console.log(rect)
+            var enabled = true;
+            if(rect.attr("class") !== "disabled") {
+                rect.attr('class','disabled')
+              RemoveLegendChoice(d)
+            } else { rect.attr("class","enabled") 
+              AddLegendChoice(d)
+              }
+             // var newData = (currentData.filter(function(d) { return d.Engagement !== legendChoice } ))
+             //  populateMap(newData)
+
+          })
+
+        legend.append('text')
+          .attr("x", 110)
+          .attr("y", height - 145)
+          .attr("dy", ".35em")
+          .text(function(d,i) { return d})
+          .attr("class","textselected")
+          .style("text-anchor", "end")
+          .style("font-size", 10)
+      }
 
      function RemoveLegendChoice(circledata) {
         //console.log(circledata)
@@ -103,11 +113,7 @@ d3.json("/data/world.json", function(error, world) {
           .transition().duration(1000)
           .attr("opacity",0).transition().duration(500)
           .attr("r",0)
-        //console.log(region)
-        //Remove stackedbarchart rect values
-        //d3.selectAll("."+ circledata.toLowerCase() + ".regions_rect").transition().style("opacity",0)
-          build_chart_region(region_data,circledata)
-
+        
       }
 
       function AddLegendChoice(circledata) {
@@ -116,20 +122,17 @@ d3.json("/data/world.json", function(error, world) {
           .transition().delay(function(d,i) { return i * 2})
           .attr("opacity",1)
           .attr("r",5)
-           //console.log(region)
-         // d3.selectAll("."+ circledata.toLowerCase() + ".regions_rect").transition().style("opacity",1)
-           build_chart_region(region_data,circledata)
       }
 
-     function circleEngagement(d) {
-        //console.log(d)
-           if (d.Engagement === "Full") { return "full"}
-          else if ( d.Engagement === "Partial: CMT 1") { return "partialcmt1" }
-          else if ( d.Engagement === "Partial: CMT 2") { return "partialcmt2" }
-          else if ( d.Engagement === "Partial: Training 1") { return "partialt1" }
-          else if ( d.Engagement === "Partial: Training 2") { return "partialt2" }
-          else if ( d.Engagement === "Zero") { return "zero" }
-      }//circleEngagement
+         function circleEngagement(d) {
+            //console.log(d)
+               if (d.Engagement === "Full") { return "full"}
+              else if ( d.Engagement === "Partial: CMT 1") { return "partialcmt1" }
+              else if ( d.Engagement === "Partial: CMT 2") { return "partialcmt2" }
+              else if ( d.Engagement === "Partial: Training 1") { return "partialt1" }
+              else if ( d.Engagement === "Partial: Training 2") { return "partialt2" }
+              else if ( d.Engagement === "Zero") { return "zero" }
+        }//circleEngagement
       
       function populateMap(circledata) {
         //console.log(circledata)
@@ -194,6 +197,46 @@ d3.json("/data/world.json", function(error, world) {
               else if ( d.Engagement === "Zero") { return "zero" }
         }//circleEngagement
         
+        // function update(d) {
+        //       if(currentcircle) {
+        //           currentcircle.transition().duration(2000).attr("r", 5) 
+        //         }
+        //       //console.log(d)
+        //       currentcircle = d3.select(this)
+
+        //       //console.log(d3.select(this))
+        //       d3.select(this)
+        //       .style("opacity",1)
+        //       .classed("selected",true)
+        //       .transition()
+        //         .duration(2000)
+        //         .attr("r", 15)
+
+        //       tooltip.transition().duration(2000)
+        //           .style('opacity', 0)
+
+        //       var string = "";
+        //           string = string + "<strong>";
+        //           string = string + "Site: " + "</strong>";
+        //           string = string + d["Site Code"];
+        //           string = string + "<br>";
+        //           string = string + "City: "
+        //           string = string + d["City"]
+        //           string = string + "<hr>"
+        //           string = string + "Engagement: "
+        //           string = string + d["Engagement"]
+
+        //       tooltip.html(function() { return string
+        //       })
+        //        .style('left', (d3.event.pageX + 25) + 'px')
+        //        .style('top',  (d3.event.pageY - 30) + 'px')
+        //        .style({ "font-size": "15px", "line-height": "normal"})
+        
+        //        //.style({"border": "solid 1px black"})
+        //        //.style({"border": "solid 1px " + tooltipcolor})
+
+        // }//update
+
         var currentcircle;
 
         function mouseover(d) {
@@ -242,10 +285,13 @@ d3.json("/data/world.json", function(error, world) {
           tooltip.transition().duration(20)
             .style('opacity',0)
         }//mouseout
+
       }
 
         var currentcircle; 
     
   });//csv
 });//json
+
+
 

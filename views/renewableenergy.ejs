@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head><% include partials/template/head.ejs %>
+	<style>
+		h1 {
+			border-bottom: 2px solid green;
+			width: auto;
+		}
+		.axis line {
+			stroke: black !important;
+			stroke-width: .1;
+		}
+		.axis path {
+			display:none;
+		}
+		.axis text {
+			font-size: 14px;
+		}
+
+		.axis.linegraph line {
+			stroke: black;
+			stroke-width: .8;
+		}
+		.allContent {
+			float:left;
+			width:800px;
+		}
+		
+		.barGraph-title h2 {
+			/*Text-align won't work with inline*/
+	
+			text-align: center;
+		}
+
+			.barGraph-title p {
+			text-align: center;
+			font-size: 20px;
+		}
+
+
+		.barGraphText{
+			position:absolute;
+			right:200px;
+			top:0px;
+		}
+		.button {
+			border: 1px solid black;
+			cursor:pointer;
+			display: inline-block;
+			font-size: 17px;
+			margin-left: 10px;
+			padding:5px;
+		}
+		.buttonContainer {
+				display: inline-block;
+				margin:0 auto;
+				overflow:hidden;
+				text-align: center;
+				width:100%;
+		}
+		.button.selected {
+			border: 3px solid green;
+			color:#296629;
+			font-weight: bold;
+		}
+		.clearfix {
+			clear:both;
+		}
+		.countryName{ 
+			font-size:18px;
+			font-weight: bold;
+		}
+		.date{ 
+		font-size:15px;
+		}
+		.moreInfo { 
+			float:left;
+			left:800px;
+			position:absolute;
+			top: 125px;
+			width:400px;
+		}
+		.playAll {
+			cursor:pointer;
+			margin-left:12%;
+			margin-bottom:5px;
+		}
+		.source {
+			margin-left:215px;
+		}
+		.switch {
+			display:inline;
+			font-size: 20px;
+			margin-left:190px;
+			margin-top: 5px;
+		}
+		.radio { 	
+			height:1.3em;		
+			width:1.3em; 
+			}
+		.tooltip {
+		  position: absolute;
+			padding: 5px;
+		  pointer-events: none;
+		  border: 1px solid green;
+		  border-radius: 12px;
+			line-height: 20px;
+		  opacity: .07;
+		  background-color:white;
+		}
+		.table{
+			background:None;
+		}
+		.table ul{
+			float:left;
+			margin:0px;
+			padding:0px;
+		}
+		.table ul li{
+			list-style:none;
+			padding:4px 9px; 
+			text-align: center;
+		}
+		.table ul li.title{
+			font-weight:bold;
+			background:#fff;
+			color:#000;
+		}
+		.table ul li.even{
+			background:#fff;
+		}
+		.table ul li.odd{
+			color: black;
+			background-color: rgba(102, 255, 51, 0.09);
+		}
+		.value {
+			font-size:15px;
+			font-weight: bold;
+		}
+
+		.line-graph {
+			float:left;
+			left:820px;
+			position:absolute;
+			top: 250px;
+			width:400px;
+		}
+
+		.line { 
+			stroke: black;
+			stroke-width: 1px;
+			opacity: 0.5;
+			fill: none;
+		}
+		.line:hover { 
+			stroke: green;
+			stroke-width:2px;
+			opacity:1;
+		}
+
+		
+		#compare { 
+			float:left;
+			left:800px;
+			position:absolute;
+			top: 700px;
+			width:400px;
+		}
+		
+		table {
+			text-align:center;
+		}
+		
+		td {
+			width:120px;
+		}
+		
+		</style>
+
+</head>
+<body>
+    <header><% include partials/template/header.ejs %></header>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-2" id="leftnav">
+      <% include partials/content/leftNav.ejs %>
+		</div>
+
+		<div class="col-md-10" >
+				<h1><%= friendlyname %></h1>
+			<div class="allContent">
+				<div class="barGraph-title">
+					<h2>Renewable Energy </h2><p style="font-size: 15px">Percent of total engery generation from 2002 - 2012</p>
+				</div>
+				<div class="playAll">
+					<div class="switch"></div>
+				</div>
+			<div class="buttonContainer"></div>
+			<div class="clearfix"></div>
+			<div class="barGraph">
+			
+			</div>
+			<div class="source"
+				<span>Source:</span><a href="https://data.oecd.org/energy/renewable-energy.htm#indicator-chart">https://data.oecd.org/energy</a>
+			</div>
+		</div>
+		<div class="line-graph"></div>
+		<div id="compare"></div>
+				</div>
+			
+		
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="/javascripts/scatterplot_v1_linechart_integration.js"></script>
+

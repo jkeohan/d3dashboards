@@ -2,7 +2,7 @@
   "examples": [{
     "title" : "worldmap",
     "friendlyname" : "World Map",
-    "js": "worldmap.js",
+    "js": "worldmap_V2_horizonal_legend.js",
     "pic": "/images/examples/worldmap.png"
   },{
     "title" : "bubble",
@@ -32,7 +32,14 @@
     "worldmap"  : "programoverview.js",
     "piechart"  : "piechart.js",
     "stackedbar": "po-stackedbarchart.js"
-    }],
+    },{
+    "title" : "renewableenergy",
+    "friendlyname" : "Renewable Energy",
+    "worldmap"  : "programoverview.js",
+    "piechart"  : "piechart.js",
+    "stackedbar": "po-stackedbarchart.js"
+      }],
+
 
   "social" : [{
     "shortname" : "gitbub",
