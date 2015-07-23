@@ -30,7 +30,7 @@ var choices = d3.select(".switch").append("form").selectAll("input").data(["Regi
   //.attr("onChange", function(d) { return "build_chart(' "+d+ " '') "} ) 
     //.attr("onChange", function(d) { console.log("run 2x") ;return build_chart(d)} ) 
 
-var stackedbar = d3.select(".stackedbarchart").append("svg")
+var stackedbar = d3.select(".po-stackedbarchart").append("svg")
     .attr("width", width_stackedbar + margin.left + margin.right)
     .attr("height", height_stackedbar + margin.top + margin.bottom)
     .attr("class","svg-stackedbar")

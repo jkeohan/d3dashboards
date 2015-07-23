@@ -1,9 +1,12 @@
 
+.content.main{
+	padding:20px;
+}
 .container {
 	padding-bottom: 10px;
 	margin-left: 50px;
 	margin-right: 50px;
-	width: 1200px;
+/*	width: 1200px;*/
 	min-height: 100%
 }
 
@@ -14,6 +17,7 @@
 html,
 body {
 	height:100%;
+	width:100%;
 }
 
 footer {
@@ -56,13 +60,13 @@ http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page
 	padding-left:0px;
 }
 
- #programoverview {
+/* #programoverview {
  	width:1000px
- }
+ }*/
 
- .col-md-12.po-worldmap {
+/* .col-md-12.po-worldmap {
  	width:1000px;
- }
+ }*/
 
 .example.group {
 	padding-bottom:40px;
@@ -323,7 +327,7 @@ ul.nav {
 
 .tick text { 
 	font-size: 10px;
-	font-weight: bold;
+	/*font-weight: bold;*/
 }
 
 .rectangleselected { 
@@ -377,6 +381,7 @@ ul.nav {
 			/*display:inline;*/
 			font-size: 20px;
 			margin-left:-10px;
+			margin-bottom: -15px;
 			/*margin-top: 5px;*/
 		}
 
@@ -392,7 +397,7 @@ ul.nav {
 			display:none;
 		}
 		.axis text {
-			font-size: 14px;
+			font-size: 12px;
 		}
 
 		.axis.linegraph line {
@@ -548,3 +553,5 @@ ul.nav {
 		td {
 			width:120px;
 		}
+
+		.subunit.AUZ { fill: #dcd !important; }

@@ -223,9 +223,9 @@ points.enter().append("circle")
            .style({ "font-size": "15px", "line-height": "normal"})
         }//mouseover
 
-        function mouseout(d) {
-          tooltip.transition().duration(1000)
-            .style('opacity',0)
+        // function mouseout(d) {
+        //   tooltip.transition().duration(1000)
+        //     .style('opacity',0)
         }//mouseout
 
 	

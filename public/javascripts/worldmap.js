@@ -17,7 +17,7 @@ var projection = d3.geo.mercator()
     .center([20, 5])
     .rotate([4.4, 0])
     //.parallels([50, 60])
-    .scale(125)
+    .scale(100)
     .translate([width / 2, height / 2]);
 
 var path = d3.geo.path()
@@ -45,7 +45,12 @@ d3.json("/data/world.json", function(error, world) {
       //currentData will be used for filtering based on legend options. 
       //var currentData = data//.map(function(d) { return d.Engagement == "*"})
        var currentData = data//.filter(function(d) { return d.Engagement  === "Full"})
-
+      //d3.set() constructs a new set. 
+      //If array is specified, adds the given array of string values to the returned set.
+      
+      //d3.set().values()s Returns an array of the string values in this set. The order of 
+      //the returned values is arbitrary. Can be used as a convenient way of computing the 
+      //unique values for a set of strings.
       var legendVals = d3.set(data.map(function(d) { return d.Engagement } )).values()
       function EngagementVals() {
         var engaged = d3.set(data.map(function(d) { return d.Engagement } )).values()

@@ -5,12 +5,26 @@
 <body>
     <header><% include partials/template/header.ejs %></header>
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-2" id="leftnav">
-      <% include partials/content/leftNav.ejs %>
+	<div class="content main" style="margin-left:50px; margin-right:50px">
+		<h1><%= friendlyname %></h1>
+		<div class="containers">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="po-legend"></div>
+					<div class="po-worldmap"></div>
+				</div>
+				<div class="col-lg-4">
+						<div class="po-piechart"></div>
+						<div class="po-stackedbarchart">
+						<div class="switch"></div>
+				</div>			
+			</div>
 		</div>
-		<div class="col-md-10" >
+	</div>
+
+<!-- <div class="container">
+	<div class="row">
+		<div class="col-md-12" >
 			<div class="container"  id="programoverview">
 				<div class="row" id="programoverview" >
 				<h1><%= friendlyname %></h1>
@@ -27,14 +41,11 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <script src="/javascripts/po-stackedbarchart_V3.js"></script>
 <script src="/javascripts/po-piechart.js"></script>
 <script src="/javascripts/po-worldmap.js"></script>
-
-
-
 </body>
 
 </html>

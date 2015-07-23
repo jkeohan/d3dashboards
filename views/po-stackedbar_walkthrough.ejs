@@ -1,0 +1,48 @@
+<html>
+<head><% include partials/template/head.ejs %></head>
+
+<body>
+    <header><% include partials/template/header.ejs %></header>
+	<div class="content main" style="margin-left:50px; margin-right:50px" >
+		<div class="containers">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="basicBarChart"></div>		
+				</div>
+			</div>
+		</div>
+		<div class="containers">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>Intro</h1>
+					<p>This walkthough will explain in detail how to add the stacked bar chart to the dashboard and contains the following sections:</p>
+
+					<ul>
+						<li>Step 1: Creating a Bare Bones Bar Chart</li>
+						<li>Adding x\y axises</li>
+						<li>Adding x\y scales</li>
+						<li>Updating to include enter/update/exit methodology</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="containers">
+			<div class="row">
+				<div class="col-lg-12">
+					<pre><code>
+						var width_piechart = parseInt(d3.select('.po-piechart').style('width')),
+							pie_height = 250, //parseInt(d3.select('.po-piechart').style('width')),
+							radius = 100;
+					</code></pre>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<script src="/javascripts/basicBar.js"></script>
+</body>
+
+</html>
+
+

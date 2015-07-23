@@ -2,15 +2,15 @@ var app = angular.module('myApp', [])
 
 app.controller('LineChartController', function($scope) {
 	$scope.activities = [ 
-		{"minutes" : 10, "miles": 1, "date" : "Jan-02-2014","type" : "Run"},
-	  {"minutes" : 20, "miles" : 1.2, "date" : "Jan-05-2014", "type" : "Run"},
-	  {"minutes" : 60, "miles": 1, "date" : "Jan-10-2014", "type" : "Run"},
-	  {"minutes" : 60,"miles": 1.7,"date" : "Jan-29-2014","type" : "Run"},
-	  {"minutes" : 60,"miles": .5,"date" : "Feb-10-2014","type" : "Run"},
-	  {"minutes" : 10,"miles": .4,"date" : "Jan-03-2014","type" : "Walk"},
-	  {"minutes" : 20,"miles" : .7, "date" : "Jan-06-2014","type" : "Walk"},
-	  {"minutes" : 60,"miles": .9,"date" : "Jan-11-2014","type" : "Walk"},
-	  {"minutes" : 60,"miles": .5,"date" : "Jan-20-2014","type" : "Walk"},
+		// {"minutes" : 10, "miles": 1, "date" : "Jan-02-2014","type" : "Run"},
+	 //  {"minutes" : 20, "miles" : 1.2, "date" : "Jan-05-2014", "type" : "Run"},
+	 //  {"minutes" : 60, "miles": 1, "date" : "Jan-10-2014", "type" : "Run"},
+	 //  {"minutes" : 60,"miles": 1.7,"date" : "Jan-29-2014","type" : "Run"},
+	 //  {"minutes" : 60,"miles": .5,"date" : "Feb-10-2014","type" : "Run"},
+	 //  {"minutes" : 10,"miles": .4,"date" : "Jan-03-2014","type" : "Walk"},
+	 //  {"minutes" : 20,"miles" : .7, "date" : "Jan-06-2014","type" : "Walk"},
+	 //  {"minutes" : 60,"miles": .9,"date" : "Jan-11-2014","type" : "Walk"},
+	 //  {"minutes" : 60,"miles": .5,"date" : "Jan-20-2014","type" : "Walk"},
 	  {"minutes" : 60,"miles": 1,"date" : "Feb-11-2014","type" : "Walk"}
 	  ]
 })

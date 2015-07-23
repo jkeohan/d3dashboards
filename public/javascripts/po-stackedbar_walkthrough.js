@@ -35,62 +35,42 @@ var stackedbar = d3.select(".po-stackedbarchart").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
- stackedbar.append("g")
-      .attr("class", "y axis")
-
-  stackedbar.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height_stackedbar + ")")
-
 //////////  DATA IMPORT /////////////////////////
-  // d3.csv("../data/cm_sampledata.csv", function(error, barchart_data) {
+  d3.csv("../data/cm_sampledata.csv", function(error, data) {
+    console.log(data)
 
-  //   barchart_data = barchart_data.filter(function(d) { return !(d.Region == "TBD" || d.Region == "Sample Region")})
-  //   barchart_data.forEach(function(d){
-  //       if (d.Engagement === "Full") { 
-  //         d.enabled = "enabled";
-  //         d.Engagement = "Full"}
-  //       else if ( d.Engagement === "Partial: CMT 1") {  d.enabled = "enabled";d.Engagement = "CMT 1" }
-  //       else if ( d.Engagement === "Partial: CMT 2") {  d.enabled = "enabled";d.Engagement = "CMT 2" }
-  //       else if ( d.Engagement === "Partial: Training 1") {  d.enabled = "enabled";d.Engagement = "Training 1" }
-  //       else if ( d.Engagement === "Partial: Training 2") {  d.enabled = "enabled";d.Engagement = "Training 2" }
-  //       else if ( d.Engagement === "Zero") { d.enabled = "enabled";d.Engagement = "Zero" }  
-  //   })  
+    data = data.filter(function(d) { return !(d.Region == "TBD" || d.Region == "Sample Region")})
+    data.forEach(function(d){
+        if (d.Engagement === "Full") { d.Engagement = "Full"}
+        else if ( d.Engagement === "Partial: CMT 1") { d.Engagement = "CMT 1" }
+        else if ( d.Engagement === "Partial: CMT 2") { d.Engagement = "CMT 2" }
+        else if ( d.Engagement === "Partial: Training 1") { d.Engagement = "Training 1" }
+        else if ( d.Engagement === "Partial: Training 2") { d.Engagement = "Training 2" }
+        else if ( d.Engagement === "Zero") {return d.Engagement = "Zero" }  
+    })
+//barchart_data = data
+    render_barchart(data)
+  });//csv
 
-  //   render_barchart(barchart_data)
-  // });//csv
 
-  function render_barchart(data,engagement,enabled) {
+  function render_barchart(input,filter) {
+
+    //barchart_data = input
+
+    console.log(barchart_data)
     
-
-      data = data;
-
-      if(engagement) { 
-        data.forEach(function(d) {
-              if(d.Engagement == engagement) {
-                if(enabled) { d.enabled = "enabled" }
-                else { 
-                  d.enabled = ""}
-              }
-          })
+      if(filter) { 
+        console.log("filter chosen")
+        input = input.filter(function(d) { 
+          console.log(d)
+          return !(d.Engagement == filter) })
       }
-
-      // input.filter(function(d) { 
-      //   if(d.enabled) { console.log("yes")} else { console.log("no")}
-      // })
-      data = data.filter(function(d) { 
-        return d.enabled 
-      })
-
-      console.log(data)
 
       nested_data = d3.nest()
       .key( function(d) { return d.Region})
       .key( function(d) { return d.Engagement})
       .rollup(function(leaves) { return leaves.length })
-      .entries(data)
-
-    //barchart_data = nested_data
+      .entries(input)
 
     formatRegion = (function () {
     var regionArray = [];
@@ -118,34 +98,35 @@ var stackedbar = d3.select(".po-stackedbarchart").append("svg")
   }
   )()
 
-  console.log(formatRegion)
+
   //Adds  
   formatRegion.forEach(function(d) {
     var y0 = 0;
     d.engagement = colorScale.domain().map(function(name) { 
-      if(name == engagement) { return {name: name, y0: y0, y1: y0 += +d[name]}; }
-      else { return {name: name, y0: y0, y1: y0 += +d[name]}; }
-
-    });
+      return {name: name, y0: y0, y1: y0 += +d[name]}; });
     d.total = d.engagement[d.engagement.length - 1].y1;
   });
 
   formatRegion.sort(function(a, b) { return b.total - a.total; });
 
+  console.log(formatRegion)
+
   x.domain(formatRegion.map(function(d) { return d.Region; }));
   y.domain([0, d3.max(formatRegion, function(d) { return d.total; })]);
 
-  stackedbar.select(".y.axis").transition().duration(1500) // https://github.com/mbostock/d3/wiki/Transitions#wiki-d3_ease
-    .call(yAxis);  
+  stackedbar.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height_stackedbar + ")")
+      .call(xAxis);
 
-  stackedbar.select(".x.axis").transition().duration(1500)
-    .call(xAxis)
   stackedbar.select(".x.axis")//.transition().duration(1000).call(xAxis)
     .selectAll("text").style("text-anchor","end")
     .attr("transform","rotate(-65)")
     .style("font-size",10)
 
- 
+  stackedbar.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
     // .append("text")
     //   .attr("transform", "rotate(-90)")
     //   .attr("y", 6)
@@ -169,7 +150,6 @@ var stackedbar = d3.select(".po-stackedbarchart").append("svg")
    rect.attr("width", x.rangeBand())
         .attr("y",height_stackedbar-10)
         .attr("x", function(d) { return x(d.Region) })
-        //.attr("x", 0)
         .attr("height",10)
 
     rect.enter().append("rect")
@@ -191,9 +171,6 @@ var stackedbar = d3.select(".po-stackedbarchart").append("svg")
         //   })
         .ease('elastic')
 
-  stackedbar.select(".x.Axis").transition().duration(2000).call(xAxis);
-  stackedbar.select(".y.Axis").transition().duration(2000).call(yAxis);
-
   // region.selectAll("rect")
   //     .data(function(d) { return d.engagement; })
   //   .enter().append("rect")
@@ -205,4 +182,4 @@ var stackedbar = d3.select(".po-stackedbarchart").append("svg")
 
 };
 
-//1.  Getting
+//1.  Getting invalid negative values for several rects after making updates to update/enter

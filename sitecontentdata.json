@@ -31,7 +31,8 @@
     "friendlyname" : "Program Overview",
     "worldmap"  : "programoverview.js",
     "piechart"  : "piechart.js",
-    "stackedbar": "po-stackedbarchart.js"
+    "stackedbar": "po-stackedbarchart.js",
+    "walkthrough": "po-stackedbarchart_walkthrough"
     },{
     "title" : "renewableenergy",
     "friendlyname" : "Renewable Energy",

@@ -99,6 +99,26 @@ router.get('/dashboards/:dashboardid', function(req,res) {
 		}
 })
 
+router.get('/dashboards/programoverview/walkthrough', function(req,res) {
+	var examples = [];
+	console.log("inside route")
+
+	appdata.dashboards.forEach(function(item){
+		console.log(item)
+		if(item.walkthrough === 'po-stackedbarchart_walkthrough') {
+				examples.push(item)
+				//console.log(examples[0].js)
+		}
+	})
+		console.log(examples)
+	res.render('po-stackedbar_walkthrough', {
+		// title: examples[0].title,
+		// friendlyname:  examples[0].friendlyname,
+		// js: examples[0].js
+
+	})
+})
+
 router.get('/api/scdata', function(req,res){ 
 	console.log(appdata)
 		res.json(appdata)
