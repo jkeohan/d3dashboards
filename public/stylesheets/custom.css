@@ -1,6 +1,6 @@
 
 .content.main{
-	padding:20px;
+	padding:12px;
 }
 .container {
 	padding-bottom: 10px;
@@ -554,4 +554,4 @@ ul.nav {
 			width:120px;
 		}
 
-		.subunit.AUZ { fill: #dcd !important; }
+		/*.subunit.AUZ { fill: #dcd !important; }*/

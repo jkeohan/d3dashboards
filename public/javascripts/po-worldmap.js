@@ -54,15 +54,6 @@ d3.json("/data/world.json", function(error, world) {
         else if ( d.Engagement === "Zero") { d.enabled = true;d.Engagement = "Zero" }  
     })  
 
-      // data.forEach(function(d){
-      //     if (d.Engagement === "Full") { d.Engagement = "Full"}
-      //     else if ( d.Engagement === "Partial: CMT 1") { d.Engagement = "CMT 1" }
-      //     else if ( d.Engagement === "Partial: CMT 2") { d.Engagement = "CMT 2" }
-      //     else if ( d.Engagement === "Partial: Training 1") { d.Engagement = "Training 1" }
-      //     else if ( d.Engagement === "Partial: Training 2") { d.Engagement = "Training 2" }
-      //     else if ( d.Engagement === "Zero") {return d.Engagement = "Zero" }  
-      // })
-
       var currentData = data
       var legendVals = d3.set(data.map(function(d) { return d.Engagement } )).values()
 
@@ -113,6 +104,7 @@ d3.json("/data/world.json", function(error, world) {
     
       populateMap(currentData)
       render_barchart(data)
+      render_pie(data)
 
      function RemoveLegendChoice(circledata,enabled) {
       console.log(formatRegion)
@@ -126,10 +118,8 @@ d3.json("/data/world.json", function(error, world) {
         //Remove stackedbarchart rect values
         //d3.selectAll("."+ circledata.toLowerCase() + ".regions_rect").transition().style("opacity",0)
          //build_chart_region(region_data,circledata)
-         render_barchart(data,circledata,false)
-         console.log(data)
-
-
+        render_barchart(data,circledata,false)
+        render_pie(data,circledata,false)
       }
 
       function AddLegendChoice(circledata) {
@@ -141,6 +131,8 @@ d3.json("/data/world.json", function(error, world) {
            //console.log(region)
          // d3.selectAll("."+ circledata.toLowerCase() + ".regions_rect").transition().style("opacity",1)
            //lege(region_data,circledata)
+            render_barchart(data,circledata,true)
+            render_pie(data,circledata,true)
       }
       
       function populateMap(circledata) {
