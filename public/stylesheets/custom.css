@@ -166,6 +166,13 @@ stroke: white; stroke-width: 0.75px; fill: lightgrey;
 
 }
 
+.col-lg-8 {
+	padding-right:0px;
+}
+.col-lg-4 {
+	padding-left:0px;
+}
+
  .clearfix {
           clear: both;
      }
