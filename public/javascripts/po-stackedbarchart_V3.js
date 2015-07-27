@@ -12,22 +12,15 @@ var x = d3.scale.ordinal()
 var y = d3.scale.linear()
     .rangeRound([height_stackedbar, 0]);
 
-// var color = d3.scale.ordinal()
-//     .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
 var vals = ["Full","CMT 1","CMT 2","Training 1", "Training 2", "Zero"]
 var colorScale = d3.scale.ordinal()
- .domain(vals)
+  .domain(vals)
   .range((['#CECE06','#B8B800','#9AB900','#33A626','#337F33','#296629']).reverse())
 
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom");
+var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left")
-    .tickFormat(d3.format(".2s"));
+var yAxis = d3.svg.axis().scale(y).orient("left")
+    //.tickFormat(d3.format(".2s"));
 
 var stackedbar = d3.select(".po-stackedbarchart").append("svg")
     .attr("width", width_stackedbar + margin.left + margin.right)

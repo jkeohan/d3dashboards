@@ -226,6 +226,6 @@ points.enter().append("circle")
         // function mouseout(d) {
         //   tooltip.transition().duration(1000)
         //     .style('opacity',0)
-        }//mouseout
+        //}//mouseout
 
 	

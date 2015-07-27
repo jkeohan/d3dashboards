@@ -554,4 +554,13 @@ ul.nav {
 			width:120px;
 		}
 
+.fa.fa-linkedin{
+	border-radius:50px;
+	background-color: #0085AE;
+	width:40px;
+	height:40px;
+	    text-align: center;
+    line-height: 50px;
+    font-size: 25px;
+}
 		/*.subunit.AUZ { fill: #dcd !important; }*/
