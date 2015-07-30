@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head><% include partials/template/head.ejs %>
+<style>
+	#po-worldmap{
+		width:70%;
+		height:100%;
+	}
+	#po-piechart{
+		width:30%;
+		height:30%;
+	}
+	#po-stackedbarchart{
+		width:30%;
+		height:70%;
+	}
+</style>
+</head>
+
+<body onload="dashboard()">
+   <header><% include partials/template/header.ejs %></header>
+		<div class="content main" style="margin-left:50px; margin-right:50px">
+			<h1><%= friendlyname %></h1>
+			<div class="containers">
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="po-legend"></div>
+						<svg id="po-worldmap"></svg>
+					</div>
+					<div class="col-lg-4">
+						<svg id="po-piechart" class="svgDash"></svg>
+						<svg id="po-stackedbarchart" class="svgDash"></svg>
+				</div>			
+			</div>
+		</div>
+	</div>
+
+<!-- <div class="container">
+	<div class="row">
+		<div class="col-md-12" >
+			<div class="container"  id="programoverview">
+				<div class="row" id="programoverview" >
+				<h1><%= friendlyname %></h1>
+					<div class="col-md-12 po-worldmap" ></div>
+				</div>
+				<div class="row" id="programoverview">
+					<div class="col-md-12 legend"></div>
+				</div>
+				<div class="row" id="programoverview">
+					<div class="switch"></div>
+					<div class="col-md-4 stackedbarchart"></div>
+					<div class="col-md-4 piechart"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+<script src="/javascripts/development/dashboard.js"></script>
+<!-- <script src="/javascripts/programoverview/po-stackedbarchart.js"></script>
+<script src="/javascripts/programoverview/po-piechart.js"></script>
+<script src="/javascripts/programoverview/po-worldmap.js"></script> -->
+</body>
+
+</html>
+
+

@@ -230,7 +230,7 @@ header .navigation ul.nav li {
   transition: all 0.5s ease-out;
 }
 header .navigation ul.nav li i {
-  color: #f7b71a;
+  /*color: #f7b71a;*/
   padding-right: .5em;
 }
 header .navigation ul.nav li a {

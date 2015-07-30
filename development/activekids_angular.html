@@ -1,0 +1,117 @@
+<html>
+<head>
+<!-- <script src="http://d3js.org/d3.v3.min.js"></script> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script src="d3.min.js"></script>
+<script src="d3.legend.js"></script>
+<script src="angular.min.js"></script>
+<style>
+path {
+    stroke: steelblue; 
+    stroke-width: 2; 
+    fill: none;
+  }
+
+.axis path,
+.axis line {
+  fill:none;
+  stroke:grey;
+  stroke-width:1;
+  shape-rendering: crispEdges;
+}
+
+.wrapper {
+	width:900px;
+	height:100%;
+	overflow:hidden;
+}
+
+.activekidsgraph {
+	float: left;
+	font-size: 15px;
+}
+
+.activityDetails {
+	width:300px;
+	height:320px;
+	float:right;
+	margin-top:20px;
+}
+
+.activityDetailsDate h3 {
+	text-align: center;
+	border: solid 1px rgba(255, 127, 14,0.5);
+	padding:5px;
+	color: #1f7f9e;
+	margin:0;
+}
+
+.acitvityImage{
+}
+
+ul.nav-details{
+	list-style-type: none;
+	overflow:hidden;
+	margin:0;
+}
+
+.nav-details li{
+	text-decoration: none;
+}
+
+.nav-details li a{
+	display:inline;
+	float:left;
+	font-size: 16px;
+	text-decoration: none;
+	border: solid 1px black;
+	margin-top: 10px;
+	margin-left:12px;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.activityImage {
+	padding: 10px;
+/*	margin-left: 40px;*/
+	height: 100%;
+	text-align:center;
+	margin-top:10px;
+}
+
+.activityImage img{
+	height:100%;
+}
+
+line-chart{
+	width:500px;
+	height:400px;
+	float:left;
+}
+
+</style>
+</head>
+<body ng-app="myApp" ng-controller="LineChartController">
+<div class = "wrapper">
+	<line-chart data="activities"><script src="activekids_angular.js"></script></line-chart>
+	<div class="activityDetails">
+		<div class="activityDetailsDate"><h3>Wed, Jan-1-2014</h3></div>
+			<div class="activitydetailsinfo">
+				<ul class="nav-details">
+					<li><a href="/"><i class="fa fa-male"></i> Walk</a></li>
+					<li><a href="/"><i class="icon-resize-horizontal"></i> 1 mile</a></li>
+					<li><a href="/"><i class="icon-time"></i> 60 min</a></li>
+			  </ul>
+			</div><!--activitydetailsinfo-->
+	<!-- 	<div class="activityImage"><img src ="../images/examples/sevan.jpg"	/></div><!--activityImage--> 
+			<div class="acitvityImage"></div>
+		<div class="activityImageCaption">
+			<p style="font-size:15px; text-align:center">"Awsome walk today with dad"</p>
+		</div><!--activtyImageCaption-->
+	</div><!--activitiesDetails-->
+</div><!--wrapper-->
+	</body>
+	</html>
+
+

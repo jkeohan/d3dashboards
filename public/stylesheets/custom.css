@@ -238,6 +238,10 @@ ul.nav {
 	text-align: left;
 }
 
+.header .navigation ul.nav li i {
+	color:whilte !important;
+}
+
 .stackedbarchart {
 	font-size: 10px;
 }
