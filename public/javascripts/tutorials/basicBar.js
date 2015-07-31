@@ -101,6 +101,8 @@ function update3(data) {
 		.transition().duration(2500) 
 		.style("fill", "green")
 		.attr("x", function(d,i) { 	return i * (barWidth + barOffset)})
+		.attr("height", function(d) { return height_stackedbar - yScale(d)})
+		.attr("y",function(d) { return yScale(d) } )
 
 	rect3.enter().append('rect')
 		.attr("width",barWidth)
@@ -118,9 +120,10 @@ function update3(data) {
 
 function update4(data) {
 
-	//yScale.domain([0,d3.max(data, function(d) { return d })])
+	//yScale.domain(d3.extent(data, function(d) { return d }))
+	yScale.domain([0,d3.max(data, function(d) { return d })])
 	yAxis.scale(yScale)
-	yScale.domain([0,100])
+	//yScale.domain([0,100])
 	var rect4 = basicBar4.selectAll('.rects').data(data, function(d) { return d})
 
 	basicBar4.append("g")
@@ -132,6 +135,8 @@ function update4(data) {
 		.transition().duration(2500) 
 		.style("fill", "green")
 		.attr("x", function(d,i) { 	return i * (barWidth + barOffset)})
+		.attr("height", function(d) { return height_stackedbar - yScale(d)})
+		.attr("y",function(d) { return yScale(d) } )
 
 	rect4.enter().append('rect')
 		.attr("width",barWidth)
@@ -150,9 +155,9 @@ function update4(data) {
 
 function update5(data) {
 
-	//yScale.domain([0,d3.max(data, function(d) { return d })])
+	yScale.domain([0,d3.max(data, function(d) { return d })])
 	//yAxis.scale(yScale)
-	yScale.domain([0,100])
+	//yScale.domain([0,100])
 	xScale.domain(data.map(function(d) { return d }))
 	var rect5 = basicBar5.selectAll('.rects').data(data, function(d) { return d})
 
@@ -164,6 +169,8 @@ function update5(data) {
 		.style("fill", "green")
 		.attr("x",function(d,i) { return xScale(d) } ) 
 		.attr("width", xScale.rangeBand())
+		.attr("height", function(d) { return height_stackedbar - yScale(d)})
+		.attr("y",function(d) { return yScale(d) } )
 
 	rect5.enter().append('rect')
 		.attr("width", xScale.rangeBand())
@@ -183,9 +190,9 @@ function update5(data) {
 
 function update6(data) {
 
-	//yScale.domain([0,d3.max(data, function(d) { return d })])
+	yScale.domain([0,d3.max(data, function(d) { return d })])
 	//yAxis.scale(yScale)
-	yScale.domain([0,100])
+	//yScale.domain([0,100])
 	xScale.domain(data.map(function(d) { return d }))
 	var rect6 = basicBar6.selectAll('.rects').data(data, function(d) { return d})
 
