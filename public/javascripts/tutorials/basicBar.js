@@ -121,14 +121,12 @@ function update3(data) {
 function update4(data) {
 
 	//yScale.domain(d3.extent(data, function(d) { return d }))
+	//yScale.domain([0,100])
 	yScale.domain([0,d3.max(data, function(d) { return d })])
 	yAxis.scale(yScale)
-	//yScale.domain([0,100])
+	
 	var rect4 = basicBar4.selectAll('.rects').data(data, function(d) { return d})
-
-	basicBar4.append("g")
-      .attr("class", "y axis")
-      //.call(yAxis)
+	basicBar4.append("g").attr("class", "y axis")
 
 	rect4
 		.classed("update",true)
@@ -205,6 +203,8 @@ function update6(data) {
 		.style("fill", "green")
 		.attr("x",function(d,i) { return xScale(d) } ) 
 		.attr("width", xScale.rangeBand())
+		.attr("height", function(d) { return height_stackedbar - yScale(d)})
+		.attr("y",function(d) { return yScale(d) } )
 
 	rect6.enter().append('rect')
 		.attr("width", xScale.rangeBand())
