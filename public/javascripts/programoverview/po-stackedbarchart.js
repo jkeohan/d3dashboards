@@ -121,31 +121,43 @@ stackedbar.select(".x.axis")//.transition().duration(1000).call(xAxis)
   //   .style("text-anchor", "end")
   //   .text("Population");
 
+//Without removing all the regions the data isn't redrawn
 d3.selectAll('.region').remove()
 //Create regional grouping rangeBands
+//var region = stackedbar.selectAll(".region").data(function(d) { return d})
 var region = stackedbar.selectAll(".region").data(formatRegion)
 //Enter
 //region.exit().remove()
 //This will produce odd results when d3.selectAll('.region).remove() used and when region removed via legend
 //Regions are redrawn but only 1 engagement value is visible in each
 //region.attr("transform", function(d) { return "translate(" + x(d.Region) + ",0)"; });
+region.attr("transform", function(d) { return "translate(" + x(d.Region) + ",0)"; })
+  .classed("update",true)
+
 region.enter().append("g")
     .attr("class", "g")
+    .classed("enter",true)
     .attr("transform", function(d) { return "translate(" + x(d.Region) + ",0)"; });
 
 rect = region.selectAll("rect").data(function(d) {  return d.engagement; })
 
 rect.enter().append("rect")
     .attr("width", x.rangeBand())
-    .attr("y",function(d) { return height_stackedbar - d } )//Why minus 10?
+    //.attr("y",function(d) { return height_stackedbar - d } )//Why minus 10?
     //.attr("y",height_stackedbar)//Why minus 10?
+     .attr("y", function(d) {  return y(d.y1) })
     .attr("x", function(d) { return x(d.Region) })
     //.attr("x", 0)
-    .attr("height",0)
+    .attr("height", function(d) {  return y(+d.y0) - y(+d.y1) })
     .style("fill", function(d) { return colorScale(d.name); })
     .attr("class","region")
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
+  .transition().delay(500).duration(3000)
+    .attr("height", function(d) {  return y(+d.y0) - y(+d.y1) })
+    .attr("y", function(d) {  return y(d.y1) })
+    .attr("x", function(d) { return x(d.Region) })
+    .style("fill", function(d) { return colorScale(d.name); })
 
 //Enter+Update
 rect.transition().delay(500).duration(3000)
@@ -153,10 +165,10 @@ rect.transition().delay(500).duration(3000)
     .attr("y", function(d) {  return y(d.y1) })
     .attr("x", function(d) { return x(d.Region) })
     .style("fill", function(d) { return colorScale(d.name); })
-    // .delay(function(d, i) {
-    //       return i * 20;
-    //   })
-    //.ease('elastic')
+    .delay(function(d, i) {
+          return i * 20;
+      })
+    .ease('elastic')
 
 rect.exit().transition().duration(1000).attr("height",0).remove()
 
