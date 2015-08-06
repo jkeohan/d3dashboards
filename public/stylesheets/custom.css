@@ -1,3 +1,4 @@
+header .navigation ul.nav li
 
 .content.main{
 	padding:12px;
@@ -51,13 +52,22 @@ http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page
 */
 
 
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+/*.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
 	border:none;
-}
+	background-color: #124b5e;
+}*/
 
 .nav-tabs>li>a {
 	text-align:left;
 	padding-left:0px;
+}
+
+.nav>li>a:hover, .nav>li>a:focus {
+		background-color: #124b5e;
+	}
+
+.nav>li>a {
+	background-color: #124b5e;
 }
 
 /* #programoverview {
@@ -199,6 +209,9 @@ stroke: white; stroke-width: 0.75px; fill: lightgrey;
 	color:white;
 }
 
+.fa-bar-chart:before {
+	color:white;
+}
 .navigation {
 	color: #fcf4dc;
 }
@@ -220,7 +233,6 @@ ul.nav {
 }
 
 .nav-tabs.li.active{
-
 }
 
 .nav-tabs a{
@@ -238,6 +250,10 @@ ul.nav {
 	text-align: left;
 }
 
+header .navigation ul.nav li {
+	padding-left:0px;
+	padding-right:0px;
+}
 .header .navigation ul.nav li i {
 	color:whilte !important;
 }

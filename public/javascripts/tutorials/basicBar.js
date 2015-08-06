@@ -8,15 +8,12 @@ var margin = {top: 20, right: 20, bottom: 20, left: 30},
     barOffset = 5;
 var centerx = w/2 - margin.left
 
-//var xScale = d3.scale.linear().range([margin.left,width_stackedbar])
+//Define y Scale\Axis
 var yScale = d3.scale.linear().range([height_stackedbar, 50]);
 var yAxis = d3.svg.axis().scale(yScale).orient("left")
-
+//Define x Scale\Axis
 var xScale = d3.scale.ordinal().rangeRoundBands([0,width_stackedbar], .1)
 var xAxis = d3.svg.axis().scale(xScale).orient("bottom")
-
-
-//var yScale = d3.scale.linear().range([margin.top, height_stackedbar - margin.bottom])
 
 var basicBar1 = createSvg(".basicBarChart1","Data Join using .data(data)")
 var basicBar2 = createSvg(".basicBarChart2","Data Join using .data(function(d) { return d })")
@@ -30,24 +27,24 @@ function random() {
 		return ~~(Math.random() * 80 +10 ) } );
 		data.unshift(10)
 		//return data//.sort(function(a,b) { return a-b })
-		update1(data)
-		update2(data)
-		update3(data)
-		update4(data)
-		update5(data)
-		update6(data)
+		barChart1(data)
+		barChart2(data)
+		barChart3(data)
+		barChart4(data)
+		barChart5(data)
+		barChart6(data)
 }
 
-function update1(data) {
-
+function barChart1(data) {
+	//DATA JOIN
 	var rect1 = basicBar1.selectAll('.rects').data(data)
-
+	//UPDATE
 	rect1
 		.classed("update",true)
 		.transition().duration(2500) 
 		.style("fill", "green")
 		.attr("x", function(d,i) { 	return i * (barWidth + barOffset)})
-
+	//ENTER
 	rect1.enter().append('rect')
 		.attr("width",barWidth)
 		.attr("x",function(d,i) { return i * (barWidth+ barOffset)})
@@ -58,44 +55,38 @@ function update1(data) {
 		.style("fill", "steelblue")
 		.attr("class","rects")
 		.classed("enter",true)
-
+	//EXIT
 	rect1.exit().transition().duration(2000).style("fill","black").attr("height",0).remove()
 }
 
-function update2(data) {
-
-	data//.sort(function(a,b) { return a-b })
-
+function barChart2(data) {
+	//DATA JOIN
 	var rect2 = basicBar2.selectAll('.rects').data(data, function(d) { return d});
-
+	//UPDATE
 	rect2
 		.classed("update",true)
 		.transition().duration(2500)
-		.style("fill", "green")
-		.style("stroke","green")
+		.style("fill", "green").style("stroke","green")
 		.attr("x", function(d,i) { 	return i * (barWidth + barOffset)})
-
+	//ENTER
 	rect2.enter().append('rect')
 	.attr("width",barWidth)
 		.attr("x", function(d,i) { return i * (barWidth + barOffset)})
-		// .attr("height", function(d) { return height_stackedbar - yScale(d)})
-		// .attr("y",function(d) { return yScale(d) } )
 		.attr("height", function(d) { return d})
 		.attr("y",function(d) { return height_stackedbar - d } )
 		.style("fill", "steelblue")
 		.attr("class","rects")
 		.classed("enter",true)
-
-	//rect2.exit().transition().duration(2500).style("fill","black").remove()
+	//EXIT
 	rect2.exit().transition().duration(2000).style("fill","black").attr("height",0).remove()
 }
 
-function update3(data) {
-	console.log()
-	yScale.domain([0,d3.max(data, function(d) { return d })])
-	//yScale.domain([0,100])
-	var rect3 = basicBar3.selectAll('.rects').data(data, function(d) { return d })
+function barChart3(data) {
 
+	yScale.domain([0,d3.max(data, function(d) { return d })])
+	//DATA JOIN
+	var rect3 = basicBar3.selectAll('.rects').data(data, function(d) { return d })
+	//UPDATE
 	rect3
 		.classed("update",true)
 		.transition().duration(2500) 
@@ -103,31 +94,27 @@ function update3(data) {
 		.attr("x", function(d,i) { 	return i * (barWidth + barOffset)})
 		.attr("height", function(d) { return height_stackedbar - yScale(d)})
 		.attr("y",function(d) { return yScale(d) } )
-
+	//ENTER
 	rect3.enter().append('rect')
 		.attr("width",barWidth)
 		.attr("x",function(d,i) { return i * (barWidth+ barOffset)})
 		.attr("height", function(d) { return height_stackedbar - yScale(d)})
 		.attr("y",function(d) { return yScale(d) } )
-		// .attr("height", function(d) { return yScale(d)})
-		// .attr("y",function(d) { return height_stackedbar - yScale(d) } )
 		.style("fill", "steelblue")
 		.attr("class","rects")
 		.classed("enter",true)
-
+  //EXIT
 	rect3.exit().transition().duration(2000).style("fill","black").attr("height",0).remove()
 }
 
-function update4(data) {
+function barChart4(data) {
 
-	//yScale.domain(d3.extent(data, function(d) { return d }))
-	//yScale.domain([0,100])
 	yScale.domain([0,d3.max(data, function(d) { return d })])
 	yAxis.scale(yScale)
-	
+	//DATA JOIN
 	var rect4 = basicBar4.selectAll('.rects').data(data, function(d) { return d})
 	basicBar4.append("g").attr("class", "y axis")
-
+	//UPDATE
 	rect4
 		.classed("update",true)
 		.transition().duration(2500) 
@@ -135,32 +122,29 @@ function update4(data) {
 		.attr("x", function(d,i) { 	return i * (barWidth + barOffset)})
 		.attr("height", function(d) { return height_stackedbar - yScale(d)})
 		.attr("y",function(d) { return yScale(d) } )
-
+  //ENTER
 	rect4.enter().append('rect')
 		.attr("width",barWidth)
 		.attr("x",function(d,i) { return i * (barWidth+ barOffset)})
 		.attr("height", function(d) { return height_stackedbar - yScale(d)})
 		.attr("y",function(d) { return yScale(d) } )
-		// .attr("height", function(d) { return yScale(d)})
-		// .attr("y",function(d) { return height_stackedbar - yScale(d) } )
 		.style("fill", "steelblue")
 		.attr("class","rects")
 		.classed("enter",true)
-
+	//EXIT
 	rect4.exit().transition().duration(2000).style("fill","black").attr("height",0).remove()
+	//yAxis transition
 	basicBar4.select(".y.Axis").transition().duration(2000).call(yAxis);
 }
 
-function update5(data) {
+function barChart5(data) {
 
 	yScale.domain([0,d3.max(data, function(d) { return d })])
-	//yAxis.scale(yScale)
-	//yScale.domain([0,100])
 	xScale.domain(data.map(function(d) { return d }))
+	//DATA JOIN
 	var rect5 = basicBar5.selectAll('.rects').data(data, function(d) { return d})
-
 	basicBar5.append("g").attr("class", "y axis")
-      //.call(yAxis)
+	//UPDATE
 	rect5
 		.classed("update",true)
 		.transition().duration(2500) 
@@ -169,30 +153,26 @@ function update5(data) {
 		.attr("width", xScale.rangeBand())
 		.attr("height", function(d) { return height_stackedbar - yScale(d)})
 		.attr("y",function(d) { return yScale(d) } )
-
+	//ENTER
 	rect5.enter().append('rect')
 		.attr("width", xScale.rangeBand())
 		.attr("x",function(d,i) { return xScale(d) } ) 
-		//.attr("x",function(d,i) { return i * (barWidth+ barOffset)})
 		.attr("height", function(d) { return height_stackedbar - yScale(d)})
 		.attr("y",function(d) { return yScale(d) } )
-		// .attr("height", function(d) { return yScale(d)})
-		// .attr("y",function(d) { return height_stackedbar - yScale(d) } )
 		.style("fill", "steelblue")
 		.attr("class","rects")
 		.classed("enter",true)
-
+	//EXIT
 	rect5.exit().transition().duration(2000).style("fill","black").attr("height",0).remove()
 	basicBar5.select(".y.Axis").transition().duration(2000).call(yAxis);
 }
 
-function update6(data) {
+function barChart6(data) {
 
-	yScale.domain([0,d3.max(data, function(d) { return d })])
-	//yAxis.scale(yScale)
-	//yScale.domain([0,100])
-	xScale.domain(data.map(function(d) { return d }))
 	var rect6 = basicBar6.selectAll('.rects').data(data, function(d) { return d})
+	yScale.domain([0,d3.max(data, function(d) { return d })])
+	xScale.domain(data.map(function(d) { return d }))
+
 
 	basicBar6.append("g").attr("class", "y axis")
 	basicBar6.append("g").attr("class", "x axis").attr("transform", "translate(0," + height_stackedbar + ")") 
@@ -209,11 +189,8 @@ function update6(data) {
 	rect6.enter().append('rect')
 		.attr("width", xScale.rangeBand())
 		.attr("x",function(d,i) { return xScale(d) } ) 
-		//.attr("x",function(d,i) { return i * (barWidth+ barOffset)})
 		.attr("height", function(d) { return height_stackedbar - yScale(d)})
 		.attr("y",function(d) { return yScale(d) } )
-		// .attr("height", function(d) { return yScale(d)})
-		// .attr("y",function(d) { return height_stackedbar - yScale(d) } )
 		.style("fill", "steelblue")
 		.attr("class","rects")
 		.classed("enter",true)
@@ -248,7 +225,7 @@ function createSvg(selection,title) {
 	return selection
 }
 
-
+console.log(d3.time.months(new Date('01/01/2015'), new Date('12/01/2015')).map(d3.time.format('%b')));
 //1. Data not being imported.
 //Error: GET http://localhost:3001/dashboards/data/cm_sampledata.csv 404 (Not Found)
 //Resolution:  Updated d3.csv path from ../data/*.csv to ../../data/*.csv
