@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-
+//start app using the following: DEBUG=app ./bin/www
 var app = require('../app');
 var debug = require('debug')('bcm_portal:server');
 var http = require('http');

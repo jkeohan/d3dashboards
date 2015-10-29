@@ -101,7 +101,7 @@ d3.json("/data/world.json", function(error, world) {
       render_pie(data)
 
      function RemoveLegendChoice(circledata,enabled) {
-      console.log(formatRegion)
+      console.log(circledata)
         //DATA JOIN...Join new data with old elements if any
         var circle =  svg.selectAll("circle").filter(function(d) { return d.Engagement === circledata})
         .transition().duration(1000).attr("r", 12)

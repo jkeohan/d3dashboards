@@ -54,6 +54,7 @@ function render_barchart(data,engagement,enabled) {
   data = data.filter(function(d) { 
     return d.enabled 
   })
+
   //Returns [{key:"META", values: [{ key:"Zero", values: 34}]}]
   //Keys are nested by calling .key 2x and rollup is and item count of 2nd key
   nested_data = d3.nest()
@@ -101,7 +102,8 @@ formatRegion.forEach(function(d) {
 });
 
 formatRegion.sort(function(a, b) { return b.total - a.total; });
-
+// formatRegion.sort(function(a, b) { return b.Region - a.Region; });
+console.log(formatRegion)
 x.domain(formatRegion.map(function(d) { return d.Region; }));
 y.domain([0, d3.max(formatRegion, function(d) { return d.total; })]);
 
@@ -130,14 +132,16 @@ var region = stackedbar.selectAll(".region").data(formatRegion)
 //region.exit().remove()
 //This will produce odd results when d3.selectAll('.region).remove() used and when region removed via legend
 //Regions are redrawn but only 1 engagement value is visible in each
-//region.attr("transform", function(d) { return "translate(" + x(d.Region) + ",0)"; });
-region.attr("transform", function(d) { return "translate(" + x(d.Region) + ",0)"; })
-  .classed("update",true)
+// region.attr("transform", function(d) { return "translate(" + x(d.Region) + ",0)"; })
+//   .classed("update",true)
 
+//WHY IS EVERY REDRAW SEEING THE DATA AS AN ENTER AND NOT UPDATE?
 region.enter().append("g")
-    .attr("class", "g")
-    .classed("enter",true)
-    .attr("transform", function(d) { return "translate(" + x(d.Region) + ",0)"; });
+  .attr("class", "g")
+  .classed("enter",true)
+  .attr("transform", function(d) { return "translate(" + x(d.Region) + ",0)"; });
+
+region.exit().remove()
 
 rect = region.selectAll("rect").data(function(d) {  return d.engagement; })
 
@@ -148,27 +152,28 @@ rect.enter().append("rect")
      .attr("y", function(d) {  return y(d.y1) })
     .attr("x", function(d) { return x(d.Region) })
     //.attr("x", 0)
-    .attr("height", function(d) {  return y(+d.y0) - y(+d.y1) })
+    //.attr("height", 0)
+     .attr("height", function(d) {  return ( y(+d.y0) - y(+d.y1) )/2 })
     .style("fill", function(d) { return colorScale(d.name); })
     .attr("class","region")
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
-  .transition().delay(500).duration(3000)
+  .transition().duration(1000)
     .attr("height", function(d) {  return y(+d.y0) - y(+d.y1) })
     .attr("y", function(d) {  return y(d.y1) })
     .attr("x", function(d) { return x(d.Region) })
-    .style("fill", function(d) { return colorScale(d.name); })
+    //.style("fill", function(d) { return colorScale(d.name); })
 
 //Enter+Update
-rect.transition().delay(500).duration(3000)
-    .attr("height", function(d) {  return y(+d.y0) - y(+d.y1) })
-    .attr("y", function(d) {  return y(d.y1) })
-    .attr("x", function(d) { return x(d.Region) })
-    .style("fill", function(d) { return colorScale(d.name); })
-    .delay(function(d, i) {
-          return i * 20;
-      })
-    .ease('elastic')
+// rect.transition().delay(500).duration(3000)
+//     .attr("height", function(d) {  return y(+d.y0) - y(+d.y1) })
+//     .attr("y", function(d) {  return y(d.y1) })
+//     .attr("x", function(d) { return x(d.Region) })
+//     .style("fill", function(d) { return colorScale(d.name); })
+//     .delay(function(d, i) {
+//           return i * 20;
+//       })
+//     .ease('elastic')
 
 rect.exit().transition().duration(1000).attr("height",0).remove()
 

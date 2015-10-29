@@ -1,5 +1,6 @@
 
 var w = parseInt(d3.select('.basicBarChart1').style('width'));
+console.log(w)
 
 var margin = {top: 20, right: 20, bottom: 20, left: 30},
     width_stackedbar = w - margin.left - margin.right,
@@ -16,7 +17,7 @@ var basicBar1 = createSvg(".basicBarChart1","Data Join using .data(data)")
 var basicBar2 = createSvg(".basicBarChart2","Data Join using .data(function(d) { return d })")
 var basicBar3 = createSvg(".basicBarChart3","Adding yScale")
 var basicBar4 = createSvg(".basicBarChart4","Adding yAxis")
-
+//LAST LINE OF CODE.....setInterval(function() { random() } ,3000 )  
 function random() {
 	var data = d3.range(~~(Math.random() * 10)).map(function(d,i) { 
 		return ~~(Math.random() * 100 + 20) } );

@@ -75,7 +75,8 @@ function render_pie(data,engagement,enabled) {
 	 arcs = vis.selectAll("slice").data(pie(group_engagement(data)))
 
   arcs.enter().append("g")
-    .attr("class", "slice")	   
+    .attr("class", "slice")	 
+    .style("stroke","white")  
     .on("mouseover", function(d) {
         d3.select(this).select("path").transition().duration(200)
             .attr("d", arcOver)

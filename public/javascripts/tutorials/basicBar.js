@@ -1,5 +1,6 @@
 
 var w = parseInt(d3.select('.basicBarChart1').style('width'));
+console.log(w)
 
 var margin = {top: 20, right: 20, bottom: 20, left: 30},
     width_stackedbar = w - margin.left - margin.right,
@@ -38,6 +39,7 @@ function random() {
 function barChart1(data) {
 	//DATA JOIN
 	var rect1 = basicBar1.selectAll('.rects').data(data)
+	//console.log(rect1)
 	//UPDATE
 	rect1
 		.classed("update",true)
@@ -62,6 +64,7 @@ function barChart1(data) {
 function barChart2(data) {
 	//DATA JOIN
 	var rect2 = basicBar2.selectAll('.rects').data(data, function(d) { return d});
+	//console.log(rect2)
 	//UPDATE
 	rect2
 		.classed("update",true)
