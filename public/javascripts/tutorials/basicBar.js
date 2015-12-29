@@ -26,7 +26,7 @@ var basicBar6 = createSvg(".basicBarChart6","Adding xAxis")
 function random() {
 	var data = d3.range(~~(Math.random() * 10)).map(function(d,i) { 
 		return ~~(Math.random() * 80 +10 ) } );
-		data.unshift(10)
+		data.unshift(10)//adds 10 to the begining of the array
 		//return data//.sort(function(a,b) { return a-b })
 		barChart1(data)
 		barChart2(data)
@@ -40,23 +40,24 @@ function barChart1(data) {
 	//DATA JOIN
 	var rect1 = basicBar1.selectAll('.rects').data(data)
 	//console.log(rect1)
+
+	//ENTER
+	rect1.enter().append('rect')
+		.attr("width",barWidth)
+		.attr("x",function(d,i) { return i * (barWidth + barOffset)})
+		.attr("height", function(d) { return d})
+		.attr("y",function(d) { return height_stackedbar - d } )
+		.style("fill", "steelblue")
+		.attr("class","rects")
+		.classed("enter",true)
+
 	//UPDATE
 	rect1
 		.classed("update",true)
 		.transition().duration(2500) 
 		.style("fill", "green")
 		.attr("x", function(d,i) { 	return i * (barWidth + barOffset)})
-	//ENTER
-	rect1.enter().append('rect')
-		.attr("width",barWidth)
-		.attr("x",function(d,i) { return i * (barWidth+ barOffset)})
-		// .attr("height", function(d) { return height_stackedbar - yScale(d)})
-		// .attr("y",function(d) { return yScale(d) } )
-		.attr("height", function(d) { return d})
-		.attr("y",function(d) { return height_stackedbar - d } )
-		.style("fill", "steelblue")
-		.attr("class","rects")
-		.classed("enter",true)
+
 	//EXIT
 	rect1.exit().transition().duration(2000).style("fill","black").attr("height",0).remove()
 }
@@ -204,7 +205,11 @@ function barChart6(data) {
 }
 
 random()
-setInterval(function() { random() } ,3000 )
+var counter = 10
+setInterval(function() { 
+	random() 
+	d3.select(".counter").html(counter)
+} ,10000 )
 
 function createSvg(selection,title) { 
 	var selection = d3.select(selection).append("svg")

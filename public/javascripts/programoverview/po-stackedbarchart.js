@@ -18,7 +18,6 @@ var colorScale = d3.scale.ordinal()
   .range((['#CECE06','#B8B800','#9AB900','#33A626','#337F33','#296629']).reverse())
 
 var xAxis = d3.svg.axis().scale(x).orient("bottom");
-
 var yAxis = d3.svg.axis().scale(y).orient("left")
     //.tickFormat(d3.format(".2s"));
 
@@ -103,7 +102,6 @@ formatRegion.forEach(function(d) {
 
 formatRegion.sort(function(a, b) { return b.total - a.total; });
 // formatRegion.sort(function(a, b) { return b.Region - a.Region; });
-console.log(formatRegion)
 x.domain(formatRegion.map(function(d) { return d.Region; }));
 y.domain([0, d3.max(formatRegion, function(d) { return d.total; })]);
 
@@ -141,7 +139,7 @@ region.enter().append("g")
   .classed("enter",true)
   .attr("transform", function(d) { return "translate(" + x(d.Region) + ",0)"; });
 
-region.exit().remove()
+//region.exit().remove()
 
 rect = region.selectAll("rect").data(function(d) {  return d.engagement; })
 
@@ -153,7 +151,7 @@ rect.enter().append("rect")
     .attr("x", function(d) { return x(d.Region) })
     //.attr("x", 0)
     //.attr("height", 0)
-     .attr("height", function(d) {  return ( y(+d.y0) - y(+d.y1) )/2 })
+    .attr("height", function(d) {  return ( y(+d.y0) - y(+d.y1) ) })
     .style("fill", function(d) { return colorScale(d.name); })
     .attr("class","region")
     .on("mouseover", mouseover)

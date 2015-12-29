@@ -13,32 +13,38 @@ var colorScale = d3.scale.ordinal()
   .range((['#CECE06','#B8B800','#9AB900','#33A626','#337F33','#296629']).reverse())
 
 var projection = d3.geo.mercator()
-    .center([30, 10])
+    .center([0,40])
     // .rotate([4.4, 0])
-    .rotate([0,0])
+    //.rotate([0,0])
     // .parallels([50, 60])
-    .scale(130)
-    .translate([width / 2, height / 2]);
+    .scale(width/6)
+    //.translate([width / 2 , height / 2 ]);
+   .translate([width / 2 - 70 , height / 2 - 50]);
+// var projection = d3.geo.mercator()
+//     .center([30, 10])
+//     .rotate([0,0])
+//     // .parallels([50, 60])
+//     .scale(130)
+//     .translate([width / 2, height / 2]);
 
-var path = d3.geo.path()
-    .projection(projection);
+var path = d3.geo.path().projection(projection);
+var svg = d3.select(".po-worldmap").append("svg").attr("width", width).attr("height", height)
 
-var svg = d3.select(".po-worldmap").append("svg")
-    .attr("width", width)
-    .attr("height", height)
+//REPLACED WITH MAPSHAPER_OUTPUT.JSON FILE
+// d3.json("/data/world.json", function(error, world) {
+//   svg.selectAll(".subunit")
+//       .data(topojson.feature(world, world.objects.subunits).features)
+//     .enter().append("path")
+//       .attr("class", function(d) { console.log(d); return "subunit " + d.id; })
+//       .attr("d", path).style({ stroke:"white", "stroke-width": 0.75, fill: "lightgrey" })
 
-d3.json("/data/world.json", function(error, world) {
+d3.json("/data/countries_noaa.json", function(error, world) {
   svg.selectAll(".subunit")
-      .data(topojson.feature(world, world.objects.subunits).features)
+      .data(world.features)
     .enter().append("path")
-      .attr("class", function(d) { return "subunit " + d.id; })
-      .attr("d", path)
-        .style({
-          stroke:"white",
-          "stroke-width": 0.75,
-          fill: "lightgrey"
-
-          })
+      .attr("class", function(d) { 
+        console.log(d.properties.adm0_a3); return "subunit " + d.properties.adm0_a3; })
+      .attr("d", path).style({ stroke:"white", "stroke-width": 0.75, fill: "lightgrey" })
 
     d3.csv("/data/cm_sampledata.csv", function(data) {
 
@@ -57,7 +63,7 @@ d3.json("/data/world.json", function(error, world) {
       //var currentData = data
       var legendVals = d3.set(data.map(function(d) { return d.Engagement } )).values();
 
-      var legend = svg.append('g').attr("transform","translate(100,-20)")
+      var legend = svg.append('g').attr("transform","translate(30,40)")
         .selectAll('.legend')
         .data(colorScale.domain())//.slice().sort())
         .enter().append('g')
