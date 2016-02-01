@@ -17,9 +17,9 @@ var projection = d3.geo.mercator()
     // .rotate([4.4, 0])
     //.rotate([0,0])
     // .parallels([50, 60])
-    .scale(width/6)
+    .scale(width/5.8)
     //.translate([width / 2 , height / 2 ]);
-   .translate([width / 2 - 70 , height / 2 - 50]);
+   .translate([width / 2 - 40 , height / 2 - 50]);
 // var projection = d3.geo.mercator()
 //     .center([30, 10])
 //     .rotate([0,0])
@@ -67,25 +67,36 @@ d3.json("/data/countries_noaa.json", function(error, world) {
       //var currentData = data
       var legendVals = d3.set(data.map(function(d) { return d.Engagement } )).values();
 
-      var legend = svg.append('g').attr("transform","translate(30,40)")
-        .selectAll('.legend')
-        .data(colorScale.domain())//.slice().sort())
-        .enter().append('g')
-        .attr("class", "legend")
-        .attr("transform", function(d,i ) {
-            {return "translate(" + i * 100 + ",50)"}
-          // {return "translate(0," + i * 20 + ")"}
-        })
+      // var legend = svg.append('g').attr("transform","translate(30,40)")
+      //   .selectAll('.legend')
+      //   .data(colorScale.domain())//.slice().sort())
+      //   .enter().append('g')
+      //   .attr("class", "legend")
+      //   .attr("transform", function(d,i ) {
+      //       {return "translate(" + i * 100 + ",50)"}
+      //     // {return "translate(0," + i * 20 + ")"}
+      //   })
 
-      legend.append('rect')
-        .attr("x", 120)
-        .attr("y", height - 150)
-        .attr("width", 10)
-        .attr("height", 10)
-        .attr("class","rect enabled")
-        .style("fill", function(d,i) { return colorScale(d) } )
-        .style("stroke",function(d,i) { return colorScale(d) } )
-        .on("click", function(d) {
+      //createLegend(colorScale.domain())
+
+      console.log(colorScale.domain())
+
+      //if .enter() appended here then error legend.html is not a function
+      var legend = d3.select('.po-worldmap').append("div").attr("class","wrapper")
+        .style({position: "absolute", top:"0", width: "100%"})
+        .append("div").attr("class","row1")
+        .style({ overflow: "hidden", "font-size": ".8em", "line-height": "1.5", "padding-left": "5px"})
+
+      .selectAll(".legend").data(colorScale.domain())
+        
+      legend.enter().append("div").attr("class","legend")
+      //.style({float:"left" } ) //, width:"15%" })
+
+      legend.html(function(d,i) { return d})
+      .style("background-color", function(d){ return colorScale(d)})
+      .style({ "text-align": "center", display:"inline-block", width: "16%",color: "white"})
+      .style("border",function(d) { return "1px solid " + colorScale(d)})
+      .on("click", function(d) {
           //var legendChoice = d;
           var rect = d3.select(this); 
           var enabled = true;
@@ -95,16 +106,68 @@ d3.json("/data/countries_noaa.json", function(error, world) {
           } else { rect.attr("class","enabled") 
             AddLegendChoice(d,true)
             }
-        })
+          })
+       // .style({padding: "0 20px 20px 20px"})
 
-      legend.append('text')
-        .attr("x", 110)
-        .attr("y", height - 145)
-        .attr("dy", ".35em")
-        .text(function(d,i) { return d})
-        .attr("class","textselected")
-        .style("text-anchor", "end")
-        .style("font-size", 13)
+       /*
+       1. Setting postion absolute to wrapper then removes the width defined on legend divs
+       RESOLUTION: needed to add width: 100% to wrapper
+
+       */
+
+   
+
+      // function createLegend(data) {
+      //   console.log(width)
+      //   var legend = svg.append('g').attr("transform","translate(0,0)")
+      //     .selectAll('.legend').data(data)
+
+  
+      //   legend.enter()
+      //     .append("rect")
+      //     .attr("x",function(d,i) {return i * 100 }).attr("y", 0)
+      //     .attr("width",100).attr("height",25)
+      //     .style("fill", function(d,i) { return colorScale(d)})
+
+
+      //   legend.append('text')
+      //   .attr("x",function(d,i) {return i * 100 }).attr("y", 0)
+      //   .attr("dy", ".35em")
+      //   .text(function(d,i) { return d})
+      //   .attr("class","textselected")
+      //   .style("text-anchor", "middle")
+      //   .style("font-size", 13)
+      //   .style("fill","black")
+      // }
+
+      // legend.append('rect')
+      //   .attr("x", 120)
+      //   .attr("y", height - 150)
+      //   .attr("width", 10)
+      //   .attr("height", 10)
+      //   .attr("class","rect enabled")
+      //   .style("fill", function(d,i) { return colorScale(d) } )
+      //   .style("stroke",function(d,i) { return colorScale(d) } )
+      //   .on("click", function(d) {
+      //     //var legendChoice = d;
+      //     var rect = d3.select(this); 
+      //     var enabled = true;
+      //     if(rect.attr("class") !== "disabled") {
+      //         rect.attr('class','disabled')
+      //       RemoveLegendChoice(d,false)
+      //     } else { rect.attr("class","enabled") 
+      //       AddLegendChoice(d,true)
+      //       }
+      //   })
+
+      // legend.append('text')
+      //   .attr("x", 110)
+      //   .attr("y", height - 145)
+      //   .attr("dy", ".35em")
+      //   .text(function(d,i) { return d})
+      //   .attr("class","textselected")
+      //   .style("text-anchor", "end")
+      //   .style("font-size", 13)
     
       populateMap(data)
       render_barchart(data)
@@ -114,8 +177,8 @@ d3.json("/data/countries_noaa.json", function(error, world) {
       console.log(circledata)
         //DATA JOIN...Join new data with old elements if any
         var circle =  svg.selectAll("circle").filter(function(d) { return d.Engagement === circledata})
-        .transition().duration(1000).attr("r", 12)
-        .transition().duration(1000)
+        //.transition().duration(1000).attr("r", 12)
+        .transition().duration(500)
           .attr("r",0)
         render_barchart(data,circledata,false)
         render_pie(data,circledata,false)
@@ -123,7 +186,8 @@ d3.json("/data/countries_noaa.json", function(error, world) {
 
       function AddLegendChoice(circledata) {
          var circle =  svg.selectAll("circle").filter(function(d) { return d.Engagement === circledata})
-          .transition().delay(function(d,i) { return i * 2})
+          .transition().duration(500)
+          //delay(function(d,i) { return i * 2})
           .attr("opacity",1)
           .attr("r",5)
         render_barchart(data,circledata,true)

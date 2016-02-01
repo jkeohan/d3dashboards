@@ -142,10 +142,8 @@ http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page
 	margin-right: 50px;
 }
 
-
-
 .wrapper {
-	min-height: 100%;
+	/*min-height: 100%; this was done as the wrapper was overlaying the svg world map*/
 	position: relative;
 }
 
@@ -368,7 +366,19 @@ header .navigation ul.nav li {
 
 .disabled{
   fill:transparent !important;
+  background-color: white !important;
+  color:black !important;
+  transition: background-color: white;
+   transition-duration: 1s;
 }
+
+/*.enabled{
+  fill:transparent !important;
+  background-color: white !important;
+  color:black !important;
+  transition: background-color: white;
+  transition-duration: 1s;
+}*/
 
 .legendselected{
 		font-weight: bold;

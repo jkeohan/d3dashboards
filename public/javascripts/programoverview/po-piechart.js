@@ -6,25 +6,16 @@ var width_piechart = parseInt(d3.select('.po-piechart').style('width')),
 
 var priority_order = ["Full","Partial: CMT 1","Partial: CMT 2","Partial: Training 1", "Partial: Training 2", "Zero"]
 var vals = ["Full","CMT 1","CMT 2","Training 1", "Training 2", "Zero"]
-var colorScale = d3.scale.ordinal()
- .domain(vals)
+var colorScale = d3.scale.ordinal().domain(vals)
   .range((['#CECE06','#B8B800','#9AB900','#33A626','#337F33','#296629']).reverse())
 
 var vis = d3.select(".po-piechart")
-  .append("svg")
-    .attr("width", width_piechart)
-    .attr("height", pie_height)
-  .append("g")
-  	.attr("transform","translate(" + width_piechart/2 + "," + pie_height/2 + ")")
+  .append("svg").attr("width", width_piechart)attr("height", pie_height)
+  .append("g").attr("transform","translate(" + width_piechart/2 + "," + pie_height/2 + ")")
  
-var arc = d3.svg.arc()
-  .innerRadius(inner )
-  .outerRadius(radius + 10);
+var arc = d3.svg.arc().innerRadius(inner).outerRadius(radius + 10);
 
-var arcOver = d3.svg.arc()
-	.innerRadius(inner)
-	.outerRadius(radius + 20);
-
+var arcOver = d3.svg.arc().innerRadius(inner).outerRadius(radius + 20);
 
 var textTop = vis.append("text")
 		    .attr("dy", ".35em")
@@ -42,8 +33,6 @@ var textBottom = vis.append("text")
 		    .attr("y", 10);
 
 function render_pie(data,engagement,enabled) {
-
-	 //data = data;
 
   if(engagement) { 
     data.forEach(function(d) {
@@ -66,9 +55,7 @@ function render_pie(data,engagement,enabled) {
       return group
     }
 
-	  var total = d3.nest()
-						.rollup(function(leaves) { return leaves.length; })
-						.entries(data);
+	  var total = d3.nest().rollup(function(leaves) { return leaves.length; }).entries(data);
 
 	 arcs = vis.selectAll("slice").data(pie(group_engagement(data)))
 
@@ -102,7 +89,6 @@ arcs.append("path").attr("fill",function(d) { return colorScale(d.data.key) } ) 
     .duration(3000).call(arcTween)
       // .attr("d", arc )
      
-
 	function arcTween(a) {
     console.log(a)
 		var interpolate = d3.interpolate(this._current,a);
@@ -112,7 +98,17 @@ arcs.append("path").attr("fill",function(d) { return colorScale(d.data.key) } ) 
 
 }
 
+//ZeroViscosity
 
+var path = svg.selectAll('path')
+  .data(pie(dataset))
+  .enter()
+  .append('path')
+  .attr('d', arc)
+  .attr('fill', function(d, i) { 
+    return color(d.data.label); 
+  })                                         // UPDATED (removed semicolon)
+  .each(function(d) { this._current = d; }); // NEW
 
 // .attrTween('d', function(d) {
 //       var interpolate = d3.interpolate(this._current, d);
