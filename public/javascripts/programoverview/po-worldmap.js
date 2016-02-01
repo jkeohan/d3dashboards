@@ -39,11 +39,15 @@ var svg = d3.select(".po-worldmap").append("svg").attr("width", width).attr("hei
 //       .attr("d", path).style({ stroke:"white", "stroke-width": 0.75, fill: "lightgrey" })
 
 d3.json("/data/countries_noaa.json", function(error, world) {
+  //var worldmap = topojson.feature(world, world.objects)
+ //console.log(worldmap)
+  console.log(world)
   svg.selectAll(".subunit")
       .data(world.features)
     .enter().append("path")
       .attr("class", function(d) { 
-        console.log(d.properties.adm0_a3); return "subunit " + d.properties.adm0_a3; })
+        //console.log(d.properties.adm0_a3); 
+        return "subunit " + d.properties.adm0_a3; })
       .attr("d", path).style({ stroke:"white", "stroke-width": 0.75, fill: "lightgrey" })
 
     d3.csv("/data/cm_sampledata.csv", function(data) {

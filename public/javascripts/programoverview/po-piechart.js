@@ -94,7 +94,7 @@ function render_pie(data,engagement,enabled) {
 
 arcs.append("path").attr("fill",function(d) { return colorScale(d.data.key) } )                                            // NE                                                     // NEW      
  	  .attr("d", arc )
-    .each(function(d) { console.log(d) ; this._current = d;})  
+    .each(function(d) { this._current = d;})  
     .attrTween('d', function(d) { return d } ) //arcTween(d))  
 	    
   //THIS DOES NOTHING TO TRANSITION
