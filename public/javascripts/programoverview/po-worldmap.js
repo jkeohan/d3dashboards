@@ -180,8 +180,10 @@ d3.json("/data/countries_noaa.json", function(error, world) {
         //.transition().duration(1000).attr("r", 12)
         .transition().duration(500)
           .attr("r",0)
+        console.log(circledata)
         render_barchart(data,circledata,false)
-        render_pie(data,circledata,false)
+        redraw_pie(circledata,false)
+        //render_pie(data,circledata,false)
       }
 
       function AddLegendChoice(circledata) {
@@ -191,7 +193,7 @@ d3.json("/data/countries_noaa.json", function(error, world) {
           .attr("opacity",1)
           .attr("r",5)
         render_barchart(data,circledata,true)
-        render_pie(data,circledata,true)
+        redraw_pie(circledata,true)
       }
       
       function populateMap(circledata) {
